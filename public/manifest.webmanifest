@@ -1,0 +1,31 @@
+{
+  "name": "A Couple of Sweets",
+  "short_name": "A Couple of Sweets",
+  "start_url": "/",
+  "theme_color": "#D1B08A",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./favicon-72.png",
+      "sizes": "72x22",
+      "type": "image/png"
+    },
+    {
+      "src": "./favicon-96.png",
+      "sizes": "96x29",
+      "type": "image/png"
+    },
+    {
+      "src": "./favicon-128.png",
+      "sizes": "128x38",
+      "type": "image/png"
+    },
+    {
+      "src": "./favicon-256.png",
+      "sizes": "256x76",
+      "type": "image/png"
+    }
+  ]
+}

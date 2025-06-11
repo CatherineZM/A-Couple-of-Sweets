@@ -8,16 +8,19 @@ const nextConfig = withBundleAnalyzer({
   output: 'export',
   experimental: {
     optimizePackageImports: [
-      'framer-motion',
-      '@reduxjs/toolkit'
+
     ]
   },
-  images: {
-    remotePatterns: [{
-        hostname: 'res.cloudinary.com'
-    }],
-    unoptimized: true
-  }
+    images: {
+        dangerouslyAllowSVG: true,
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: process.env.NEXT_PUBLIC_HYGRAPH_API,
+            },
+        ]
+    },
+
 })
 
 module.exports = nextConfig

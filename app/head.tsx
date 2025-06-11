@@ -6,8 +6,8 @@ export default function Head(): JSX.Element {
     return (
         <head>
             <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-            <meta name="theme-color" content="#F9F7EF" />
-            <meta name="msapplication-navbutton-color" content="#F9F7EF" />
+            <meta name="theme-color" content="#D1B08A" />
+            <meta name="msapplication-navbutton-color" content="#D1B08A" />
             <meta
                 content="width=device-width, initial-scale=1"
                 name="viewport"

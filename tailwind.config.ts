@@ -1,3 +1,4 @@
+import { DM_Sans } from "next/font/google";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -16,6 +17,10 @@ const config: Config = {
             "3xl": "1920px", // desktop +++
         },
         extend: {
+            fontFamily: {
+                marcellus: ["var(--font-marcellus)"],
+                dmsans: ["var(--font-dm_sans)"],
+            },
             colors: {
                 cream: "#F9F7EF",
                 buttercream: "#F0EAD6",
