@@ -1,0 +1,142 @@
+"use client";
+
+// external library
+import React, { useState, useCallback, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { motion, useAnimation } from "framer-motion";
+import Link from "next/link";
+
+const menu = [
+    {
+        id: "nav-home",
+        href: "/",
+        name: "Home",
+        newWindow: false,
+    },
+    {
+        id: "nav-collections",
+        href: "/collections",
+        name: "Collections",
+        newWindow: false,
+    },
+    {
+        id: "nav-about",
+        href: "/about",
+        name: "About Us",
+        newWindow: false,
+    },
+    {
+        id: "nav-home",
+        href: "https://www.instagram.com/a_couple_ofsweets?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+        name: "Order Now",
+        newWindow: true,
+    },
+];
+
+export default function Menu(): JSX.Element {
+    const controls = useAnimation();
+    const currentPath = usePathname();
+    const [scrolled, setScrolled] = useState(false);
+
+    const useMediaQuery = (width: number): boolean => {
+        const [targetReached, setTargetReached] = useState(false);
+
+        const updateTarget = useCallback((e: MediaQueryListEvent) => {
+            if (e.matches) {
+                setTargetReached(true);
+            } else {
+                setTargetReached(false);
+            }
+        }, []);
+
+        useEffect(() => {
+            const media = window.matchMedia(`(max-width: ${width}px)`);
+            media.addEventListener("change", updateTarget);
+
+            if (media.matches) {
+                setTargetReached(true);
+            }
+
+            return () => media.removeEventListener("change", updateTarget);
+        }, [width, updateTarget]);
+
+        return targetReached;
+    };
+
+    useEffect(() => {
+        const handleScroll = (): void => {
+            const scrolledPos = window.scrollY;
+            const moved = scrolledPos > 0;
+            setScrolled(moved);
+        };
+        window.addEventListener("scroll", handleScroll, { passive: true });
+
+        return (): void => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
+    const isBreakpoint = useMediaQuery(1060);
+
+    const menuVariants = {
+        hidden: {
+            opacity: 0,
+        },
+        visible: {
+            opacity: 1,
+        },
+    };
+
+    const leftItems = menu.slice(0, 2);
+    const rightItems = menu.slice(2, 4);
+
+    return (
+        <nav className="px-mobileX md:px-tabletX lg:px-desktopX 3xl:px-plusDesktopX w-full fixed z-40 h-[100px] justify-between bg-buttercream grid grid-cols-5 gap-x-10 items-end py-4 shadow-md duration-300 transition-all ease-in-out">
+            <div className="col-span-2 flex flex-row justify-between">
+                {leftItems.map((item) => (
+                    <Link
+                        key={item.id}
+                        href={item.href}
+                        target={item.newWindow ? "_blank" : "_self"}
+                        rel={item.newWindow ? "noopener noreferrer" : undefined}
+                        className={`capitalize font-dmsans font-semibold text-xl md:text-[32px] duration-300 transition-all ease-in-out ${
+                            currentPath === item.href
+                                ? "text-olive underline"
+                                : "text-ganache hover:text-ganache/80 no-underline "
+                        }`}>
+                        {item.name}
+                    </Link>
+                ))}
+            </div>
+
+            {/* Logo Centered */}
+            <div className="flex justify-center col-span-1">
+                <Link href="/">
+                    <img
+                        src="/a-couple-of-sweets.png"
+                        alt="A Couple Of Sweets"
+                        className="w-full h-auto"
+                    />
+                </Link>
+            </div>
+
+            {/* Right Menu */}
+            <div className="col-span-2 flex flex-row justify-between">
+            {rightItems.map((item) => (
+                <Link
+                    key={item.id}
+                    href={item.href}
+                    target={item.newWindow ? "_blank" : "_self"}
+                    rel={item.newWindow ? "noopener noreferrer" : undefined}
+                    className={`capitalize font-dmsans font-semibold text-xl md:text-[32px] duration-300 transition-all ease-in-out ${
+                        currentPath === item.href
+                            ? "text-olive underline"
+                            : "text-ganache hover:text-ganache/80 no-underline "
+                    }`}>
+                    {item.name}
+                </Link>
+            ))}
+            </div>
+        </nav>
+    );
+}

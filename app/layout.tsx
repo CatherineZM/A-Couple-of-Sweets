@@ -10,6 +10,7 @@ import "./globals.css";
 
 // font
 import { Marcellus, DM_Sans } from "next/font/google";
+import Menu from "@/modules/components/utils/navigation/menu";
 
 const marcellus = Marcellus({
     weight: ["400"],
@@ -39,7 +40,8 @@ export default function RootLayout({
             <body
                 suppressHydrationWarning
                 className={`${marcellus.variable} ${dmSans.variable}`}>
-                <SmoothScrolling>{children}</SmoothScrolling>
+                    <Menu />
+                    <SmoothScrolling>{children}</SmoothScrolling>
             </body>
         </html>
     );
