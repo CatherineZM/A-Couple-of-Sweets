@@ -26,7 +26,7 @@ const menu = [
         newWindow: false,
     },
     {
-        id: "nav-home",
+        id: "nav-order",
         href: "https://www.instagram.com/a_couple_ofsweets?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
         name: "Order Now",
         newWindow: true,
@@ -91,8 +91,8 @@ export default function Menu(): JSX.Element {
     const rightItems = menu.slice(2, 4);
 
     return (
-        <nav className="px-mobileX md:px-tabletX lg:px-desktopX 3xl:px-plusDesktopX w-full fixed z-40 h-[100px] justify-between bg-buttercream grid grid-cols-5 gap-x-10 items-end py-4 shadow-md duration-300 transition-all ease-in-out">
-            <div className="col-span-2 flex flex-row justify-between">
+        <nav className="px-mobileX md:px-tabletX lg:px-desktopX 3xl:px-plusDesktopX w-full fixed z-40 h-[100px] justify-between bg-buttercream flex flex-row md:grid md:grid-cols-5 gap-x-10 items-end py-4 shadow-md duration-300 transition-all ease-in-out">
+            <div className="hidden col-span-2 md:flex flex-row justify-between">
                 {leftItems.map((item) => (
                     <Link
                         key={item.id}
@@ -121,21 +121,35 @@ export default function Menu(): JSX.Element {
             </div>
 
             {/* Right Menu */}
-            <div className="col-span-2 flex flex-row justify-between">
-            {rightItems.map((item) => (
+            <div className="hidden col-span-2 md:flex flex-row justify-between">
+                {rightItems.map((item) => (
+                    <Link
+                        key={item.id}
+                        href={item.href}
+                        target={item.newWindow ? "_blank" : "_self"}
+                        rel={item.newWindow ? "noopener noreferrer" : undefined}
+                        className={`capitalize font-dmsans font-semibold text-xl md:text-[32px] duration-300 transition-all ease-in-out ${
+                            currentPath === item.href
+                                ? "text-olive underline"
+                                : "text-ganache hover:text-ganache/80 no-underline "
+                        }`}>
+                        {item.name}
+                    </Link>
+                ))}
+            </div>
+            <div className="flex md:hidden">
                 <Link
-                    key={item.id}
-                    href={item.href}
-                    target={item.newWindow ? "_blank" : "_self"}
-                    rel={item.newWindow ? "noopener noreferrer" : undefined}
+                    key={menu[3].id}
+                    href={menu[3].href}
+                    target={menu[3].newWindow ? "_blank" : "_self"}
+                    rel={menu[3].newWindow ? "noopener noreferrer" : undefined}
                     className={`capitalize font-dmsans font-semibold text-xl md:text-[32px] duration-300 transition-all ease-in-out ${
-                        currentPath === item.href
+                        currentPath === menu[3].href
                             ? "text-olive underline"
                             : "text-ganache hover:text-ganache/80 no-underline "
                     }`}>
-                    {item.name}
+                    {menu[3].name}
                 </Link>
-            ))}
             </div>
         </nav>
     );
