@@ -13,6 +13,7 @@ const nextConfig = withBundleAnalyzer({
   },
     images: {
         dangerouslyAllowSVG: true,
+        unoptimized: true,
         remotePatterns: [
             {
                 protocol: 'https',

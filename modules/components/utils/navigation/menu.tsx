@@ -5,6 +5,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useAnimation } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 const menu = [
     {
@@ -91,65 +92,84 @@ export default function Menu(): JSX.Element {
     const rightItems = menu.slice(2, 4);
 
     return (
-        <nav className="px-mobileX md:px-tabletX lg:px-desktopX 3xl:px-plusDesktopX w-full fixed z-40 h-[100px] justify-between bg-buttercream flex flex-row md:grid md:grid-cols-5 gap-x-10 items-end py-4 shadow-md duration-300 transition-all ease-in-out">
-            <div className="hidden col-span-2 md:flex flex-row justify-between">
-                {leftItems.map((item) => (
+        <nav className='px-mobileX md:px-tabletX lg:px-desktopX 3xl:px-plusDesktopX w-full fixed z-40 h-[100px] bg-buttercream shadow-md duration-300 transition-all ease-in-out flex items-center justify-center'>
+            <div className='max-w-screen-xl w-full flex flex-row md:grid md:grid-cols-5 gap-x-10 justify-between items-end py-4'>
+                {/* Left Menu */}
+                <div className='hidden col-span-2 md:flex flex-row justify-between'>
+                    {leftItems.map((item) => (
+                        <Link
+                            key={item.id}
+                            href={item.href}
+                            target={item.newWindow ? "_blank" : "_self"}
+                            rel={
+                                item.newWindow
+                                    ? "noopener noreferrer"
+                                    : undefined
+                            }
+                            className={`capitalize font-dmsans font-semibold text-xl md:text-[32px] duration-300 transition-all ease-in-out ${
+                                currentPath === item.href
+                                    ? "text-olive underline"
+                                    : "text-ganache hover:text-ganache/80 no-underline "
+                            }`}>
+                            {item.name}
+                        </Link>
+                    ))}
+                </div>
+
+                {/* Logo Centered */}
+                <div className='flex justify-center col-span-1'>
+                    <Link href='/'>
+                        <Image
+                            src='/a-couple-of-sweets.png'
+                            alt='A Couple Of Sweets'
+                            className='w-full h-auto'
+                            width={2641}
+                            height={781}
+                        />
+                    </Link>
+                </div>
+
+                {/* Right Menu */}
+                <div className='hidden col-span-2 md:flex flex-row justify-between'>
+                    {rightItems.map((item) => (
+                        <Link
+                            key={item.id}
+                            href={item.href}
+                            target={item.newWindow ? "_blank" : "_self"}
+                            rel={
+                                item.newWindow
+                                    ? "noopener noreferrer"
+                                    : undefined
+                            }
+                            className={`capitalize font-dmsans font-semibold text-xl md:text-[32px] duration-300 transition-all ease-in-out ${
+                                currentPath === item.href
+                                    ? "text-olive underline"
+                                    : "text-ganache hover:text-ganache/80 no-underline "
+                            }`}>
+                            {item.name}
+                        </Link>
+                    ))}
+                </div>
+
+                {/* Mobile Menu */}
+                <div className='flex md:hidden'>
                     <Link
-                        key={item.id}
-                        href={item.href}
-                        target={item.newWindow ? "_blank" : "_self"}
-                        rel={item.newWindow ? "noopener noreferrer" : undefined}
+                        key={menu[3].id}
+                        href={menu[3].href}
+                        target={menu[3].newWindow ? "_blank" : "_self"}
+                        rel={
+                            menu[3].newWindow
+                                ? "noopener noreferrer"
+                                : undefined
+                        }
                         className={`capitalize font-dmsans font-semibold text-xl md:text-[32px] duration-300 transition-all ease-in-out ${
-                            currentPath === item.href
+                            currentPath === menu[3].href
                                 ? "text-olive underline"
                                 : "text-ganache hover:text-ganache/80 no-underline "
                         }`}>
-                        {item.name}
+                        {menu[3].name}
                     </Link>
-                ))}
-            </div>
-
-            {/* Logo Centered */}
-            <div className="flex justify-center col-span-1">
-                <Link href="/">
-                    <img
-                        src="/a-couple-of-sweets.png"
-                        alt="A Couple Of Sweets"
-                        className="w-full h-auto"
-                    />
-                </Link>
-            </div>
-
-            {/* Right Menu */}
-            <div className="hidden col-span-2 md:flex flex-row justify-between">
-                {rightItems.map((item) => (
-                    <Link
-                        key={item.id}
-                        href={item.href}
-                        target={item.newWindow ? "_blank" : "_self"}
-                        rel={item.newWindow ? "noopener noreferrer" : undefined}
-                        className={`capitalize font-dmsans font-semibold text-xl md:text-[32px] duration-300 transition-all ease-in-out ${
-                            currentPath === item.href
-                                ? "text-olive underline"
-                                : "text-ganache hover:text-ganache/80 no-underline "
-                        }`}>
-                        {item.name}
-                    </Link>
-                ))}
-            </div>
-            <div className="flex md:hidden">
-                <Link
-                    key={menu[3].id}
-                    href={menu[3].href}
-                    target={menu[3].newWindow ? "_blank" : "_self"}
-                    rel={menu[3].newWindow ? "noopener noreferrer" : undefined}
-                    className={`capitalize font-dmsans font-semibold text-xl md:text-[32px] duration-300 transition-all ease-in-out ${
-                        currentPath === menu[3].href
-                            ? "text-olive underline"
-                            : "text-ganache hover:text-ganache/80 no-underline "
-                    }`}>
-                    {menu[3].name}
-                </Link>
+                </div>
             </div>
         </nav>
     );
