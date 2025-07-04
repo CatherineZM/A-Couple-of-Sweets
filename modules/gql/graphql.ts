@@ -2124,6 +2124,7 @@ export enum EntityTypeName {
   Asset = 'Asset',
   ContactInfo = 'ContactInfo',
   FeaturedList = 'FeaturedList',
+  Flavour = 'Flavour',
   HomePage = 'HomePage',
   Product = 'Product',
   /** Scheduled Operation system model */
@@ -2599,6 +2600,359 @@ export type FeaturedListWhereStageInput = {
 
 /** References FeaturedList record uniquely */
 export type FeaturedListWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
+export type Flavour = Entity & {
+  __typename?: 'Flavour';
+  /** Dietary for this flavour only. If it's the same as the main product, leave this empty */
+  dietary?: Maybe<DietaryRestriction>;
+  /** If there is no description, it will by default display the full description of the product */
+  flavourDescription?: Maybe<RichText>;
+  flavourName: Scalars['String']['output'];
+  /** If the price doesn't change, leave this empty */
+  flavourPrice?: Maybe<RichText>;
+  /** The unique identifier */
+  id: Scalars['ID']['output'];
+  /** System stage field */
+  stage: Stage;
+};
+
+export type FlavourConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: FlavourWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type FlavourConnection = {
+  __typename?: 'FlavourConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<FlavourEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type FlavourCreateInput = {
+  dietary?: InputMaybe<DietaryRestriction>;
+  flavourDescription?: InputMaybe<Scalars['RichTextAST']['input']>;
+  flavourName: Scalars['String']['input'];
+  flavourPrice?: InputMaybe<Scalars['RichTextAST']['input']>;
+};
+
+export type FlavourCreateManyInlineInput = {
+  /** Create and connect multiple existing Flavour documents */
+  create?: InputMaybe<Array<FlavourCreateInput>>;
+};
+
+export type FlavourCreateOneInlineInput = {
+  /** Create and connect one Flavour document */
+  create?: InputMaybe<FlavourCreateInput>;
+};
+
+export type FlavourCreateWithPositionInput = {
+  /** Document to create */
+  data: FlavourCreateInput;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+};
+
+/** An edge in a connection. */
+export type FlavourEdge = {
+  __typename?: 'FlavourEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']['output'];
+  /** The item at the end of the edge. */
+  node: Flavour;
+};
+
+/** Identifies documents */
+export type FlavourManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<FlavourWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<FlavourWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<FlavourWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  dietary?: InputMaybe<DietaryRestriction>;
+  /** All values that are contained in given list. */
+  dietary_in?: InputMaybe<Array<InputMaybe<DietaryRestriction>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  dietary_not?: InputMaybe<DietaryRestriction>;
+  /** All values that are not contained in given list. */
+  dietary_not_in?: InputMaybe<Array<InputMaybe<DietaryRestriction>>>;
+  flavourName?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  flavourName_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  flavourName_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  flavourName_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  flavourName_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  flavourName_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  flavourName_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  flavourName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  flavourName_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  flavourName_starts_with?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+};
+
+export enum FlavourOrderByInput {
+  DietaryAsc = 'dietary_ASC',
+  DietaryDesc = 'dietary_DESC',
+  FlavourNameAsc = 'flavourName_ASC',
+  FlavourNameDesc = 'flavourName_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC'
+}
+
+export type FlavourParent = Product;
+
+export type FlavourParentConnectInput = {
+  Product?: InputMaybe<ProductConnectInput>;
+};
+
+export type FlavourParentCreateInput = {
+  Product?: InputMaybe<ProductCreateInput>;
+};
+
+export type FlavourParentCreateManyInlineInput = {
+  /** Create and connect multiple existing FlavourParent documents */
+  create?: InputMaybe<Array<FlavourParentCreateInput>>;
+};
+
+export type FlavourParentCreateOneInlineInput = {
+  /** Create and connect one FlavourParent document */
+  create?: InputMaybe<FlavourParentCreateInput>;
+};
+
+export type FlavourParentCreateWithPositionInput = {
+  Product?: InputMaybe<ProductCreateWithPositionInput>;
+};
+
+export type FlavourParentUpdateInput = {
+  Product?: InputMaybe<ProductUpdateInput>;
+};
+
+export type FlavourParentUpdateManyInlineInput = {
+  /** Create and connect multiple FlavourParent component instances */
+  create?: InputMaybe<Array<FlavourParentCreateWithPositionInput>>;
+  /** Delete multiple FlavourParent documents */
+  delete?: InputMaybe<Array<FlavourParentWhereUniqueInput>>;
+  /** Update multiple FlavourParent component instances */
+  update?: InputMaybe<Array<FlavourParentUpdateWithNestedWhereUniqueAndPositionInput>>;
+  /** Upsert multiple FlavourParent component instances */
+  upsert?: InputMaybe<Array<FlavourParentUpsertWithNestedWhereUniqueAndPositionInput>>;
+};
+
+export type FlavourParentUpdateManyWithNestedWhereInput = {
+  Product?: InputMaybe<ProductUpdateManyWithNestedWhereInput>;
+};
+
+export type FlavourParentUpdateOneInlineInput = {
+  /** Create and connect one FlavourParent document */
+  create?: InputMaybe<FlavourParentCreateInput>;
+  /** Delete currently connected FlavourParent document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single FlavourParent document */
+  update?: InputMaybe<FlavourParentUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single FlavourParent document */
+  upsert?: InputMaybe<FlavourParentUpsertWithNestedWhereUniqueInput>;
+};
+
+export type FlavourParentUpdateWithNestedWhereUniqueAndPositionInput = {
+  Product?: InputMaybe<ProductUpdateWithNestedWhereUniqueAndPositionInput>;
+};
+
+export type FlavourParentUpdateWithNestedWhereUniqueInput = {
+  Product?: InputMaybe<ProductUpdateWithNestedWhereUniqueInput>;
+};
+
+export type FlavourParentUpsertWithNestedWhereUniqueAndPositionInput = {
+  Product?: InputMaybe<ProductUpsertWithNestedWhereUniqueAndPositionInput>;
+};
+
+export type FlavourParentUpsertWithNestedWhereUniqueInput = {
+  Product?: InputMaybe<ProductUpsertWithNestedWhereUniqueInput>;
+};
+
+export type FlavourParentWhereInput = {
+  Product?: InputMaybe<ProductWhereInput>;
+};
+
+export type FlavourParentWhereUniqueInput = {
+  Product?: InputMaybe<ProductWhereUniqueInput>;
+};
+
+export type FlavourUpdateInput = {
+  dietary?: InputMaybe<DietaryRestriction>;
+  flavourDescription?: InputMaybe<Scalars['RichTextAST']['input']>;
+  flavourName?: InputMaybe<Scalars['String']['input']>;
+  flavourPrice?: InputMaybe<Scalars['RichTextAST']['input']>;
+};
+
+export type FlavourUpdateManyInlineInput = {
+  /** Create and connect multiple Flavour component instances */
+  create?: InputMaybe<Array<FlavourCreateWithPositionInput>>;
+  /** Delete multiple Flavour documents */
+  delete?: InputMaybe<Array<FlavourWhereUniqueInput>>;
+  /** Update multiple Flavour component instances */
+  update?: InputMaybe<Array<FlavourUpdateWithNestedWhereUniqueAndPositionInput>>;
+  /** Upsert multiple Flavour component instances */
+  upsert?: InputMaybe<Array<FlavourUpsertWithNestedWhereUniqueAndPositionInput>>;
+};
+
+export type FlavourUpdateManyInput = {
+  dietary?: InputMaybe<DietaryRestriction>;
+  flavourDescription?: InputMaybe<Scalars['RichTextAST']['input']>;
+  flavourName?: InputMaybe<Scalars['String']['input']>;
+  flavourPrice?: InputMaybe<Scalars['RichTextAST']['input']>;
+};
+
+export type FlavourUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: FlavourUpdateManyInput;
+  /** Document search */
+  where: FlavourWhereInput;
+};
+
+export type FlavourUpdateOneInlineInput = {
+  /** Create and connect one Flavour document */
+  create?: InputMaybe<FlavourCreateInput>;
+  /** Delete currently connected Flavour document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single Flavour document */
+  update?: InputMaybe<FlavourUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Flavour document */
+  upsert?: InputMaybe<FlavourUpsertWithNestedWhereUniqueInput>;
+};
+
+export type FlavourUpdateWithNestedWhereUniqueAndPositionInput = {
+  /** Document to update */
+  data?: InputMaybe<FlavourUpdateInput>;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Unique component instance search */
+  where: FlavourWhereUniqueInput;
+};
+
+export type FlavourUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: FlavourUpdateInput;
+  /** Unique document search */
+  where: FlavourWhereUniqueInput;
+};
+
+export type FlavourUpsertInput = {
+  /** Create document if it didn't exist */
+  create: FlavourCreateInput;
+  /** Update document if it exists */
+  update: FlavourUpdateInput;
+};
+
+export type FlavourUpsertWithNestedWhereUniqueAndPositionInput = {
+  /** Document to upsert */
+  data?: InputMaybe<FlavourUpsertInput>;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Unique component instance search */
+  where: FlavourWhereUniqueInput;
+};
+
+export type FlavourUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: FlavourUpsertInput;
+  /** Unique document search */
+  where: FlavourWhereUniqueInput;
+};
+
+/** Identifies documents */
+export type FlavourWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<FlavourWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<FlavourWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<FlavourWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  dietary?: InputMaybe<DietaryRestriction>;
+  /** All values that are contained in given list. */
+  dietary_in?: InputMaybe<Array<InputMaybe<DietaryRestriction>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  dietary_not?: InputMaybe<DietaryRestriction>;
+  /** All values that are not contained in given list. */
+  dietary_not_in?: InputMaybe<Array<InputMaybe<DietaryRestriction>>>;
+  flavourName?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  flavourName_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  flavourName_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  flavourName_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  flavourName_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  flavourName_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  flavourName_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  flavourName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  flavourName_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  flavourName_starts_with?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+};
+
+/** References Flavour record uniquely */
+export type FlavourWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
@@ -4202,8 +4556,7 @@ export type PageInfo = {
 export type Product = Entity & {
   __typename?: 'Product';
   dietary: Array<DietaryRestriction>;
-  /** If you have multiple flavours for this product, add it to this list */
-  flavourList: Array<Scalars['String']['output']>;
+  flavour: Array<Flavour>;
   /**
    * A full description of the item. Could include the complete list of ingredients, the story behind inspiration etc. This is optional. If there is no full description, it will adapt the short description instead.
    *
@@ -4221,6 +4574,19 @@ export type Product = Entity & {
   shortDescription: RichText;
   /** System stage field */
   stage: Stage;
+};
+
+
+export type ProductFlavourArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<FlavourOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<FlavourWhereInput>;
 };
 
 
@@ -4255,7 +4621,7 @@ export type ProductConnection = {
 
 export type ProductCreateInput = {
   dietary?: InputMaybe<Array<DietaryRestriction>>;
-  flavourList?: InputMaybe<Array<Scalars['String']['input']>>;
+  flavour?: InputMaybe<FlavourCreateManyInlineInput>;
   fullDescription?: InputMaybe<Scalars['RichTextAST']['input']>;
   name: Scalars['String']['input'];
   photos?: InputMaybe<AssetCreateManyInlineInput>;
@@ -4309,16 +4675,9 @@ export type ProductManyWhereInput = {
   dietary_contains_some?: InputMaybe<Array<DietaryRestriction>>;
   /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
   dietary_not?: InputMaybe<Array<DietaryRestriction>>;
-  /** Matches if the field array contains *all* items provided to the filter and order does match */
-  flavourList?: InputMaybe<Array<Scalars['String']['input']>>;
-  /** Matches if the field array contains *all* items provided to the filter */
-  flavourList_contains_all?: InputMaybe<Array<Scalars['String']['input']>>;
-  /** Matches if the field array does not contain any of the items provided to the filter */
-  flavourList_contains_none?: InputMaybe<Array<Scalars['String']['input']>>;
-  /** Matches if the field array contains at least one item provided to the filter */
-  flavourList_contains_some?: InputMaybe<Array<Scalars['String']['input']>>;
-  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
-  flavourList_not?: InputMaybe<Array<Scalars['String']['input']>>;
+  flavour_every?: InputMaybe<FlavourWhereInput>;
+  flavour_none?: InputMaybe<FlavourWhereInput>;
+  flavour_some?: InputMaybe<FlavourWhereInput>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']['input']>;
@@ -4365,8 +4724,6 @@ export type ProductManyWhereInput = {
 export enum ProductOrderByInput {
   DietaryAsc = 'dietary_ASC',
   DietaryDesc = 'dietary_DESC',
-  FlavourListAsc = 'flavourList_ASC',
-  FlavourListDesc = 'flavourList_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
   NameAsc = 'name_ASC',
@@ -4463,7 +4820,7 @@ export type ProductParentWhereUniqueInput = {
 
 export type ProductUpdateInput = {
   dietary?: InputMaybe<Array<DietaryRestriction>>;
-  flavourList?: InputMaybe<Array<Scalars['String']['input']>>;
+  flavour?: InputMaybe<FlavourUpdateManyInlineInput>;
   fullDescription?: InputMaybe<Scalars['RichTextAST']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   photos?: InputMaybe<AssetUpdateManyInlineInput>;
@@ -4484,7 +4841,6 @@ export type ProductUpdateManyInlineInput = {
 
 export type ProductUpdateManyInput = {
   dietary?: InputMaybe<Array<DietaryRestriction>>;
-  flavourList?: InputMaybe<Array<Scalars['String']['input']>>;
   fullDescription?: InputMaybe<Scalars['RichTextAST']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   price?: InputMaybe<Scalars['RichTextAST']['input']>;
@@ -4568,16 +4924,9 @@ export type ProductWhereInput = {
   dietary_contains_some?: InputMaybe<Array<DietaryRestriction>>;
   /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
   dietary_not?: InputMaybe<Array<DietaryRestriction>>;
-  /** Matches if the field array contains *all* items provided to the filter and order does match */
-  flavourList?: InputMaybe<Array<Scalars['String']['input']>>;
-  /** Matches if the field array contains *all* items provided to the filter */
-  flavourList_contains_all?: InputMaybe<Array<Scalars['String']['input']>>;
-  /** Matches if the field array does not contain any of the items provided to the filter */
-  flavourList_contains_none?: InputMaybe<Array<Scalars['String']['input']>>;
-  /** Matches if the field array contains at least one item provided to the filter */
-  flavourList_contains_some?: InputMaybe<Array<Scalars['String']['input']>>;
-  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
-  flavourList_not?: InputMaybe<Array<Scalars['String']['input']>>;
+  flavour_every?: InputMaybe<FlavourWhereInput>;
+  flavour_none?: InputMaybe<FlavourWhereInput>;
+  flavour_some?: InputMaybe<FlavourWhereInput>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']['input']>;
@@ -7088,10 +7437,22 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
+export type FeaturedDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FeaturedDataQuery = { __typename?: 'Query', featuredLists: Array<{ __typename?: 'FeaturedList', collectionName: string, collectionDescription?: { __typename?: 'RichText', raw: any } | null, productList: Array<{ __typename?: 'Product', name: string, dietary: Array<DietaryRestriction>, photos: Array<{ __typename?: 'Asset', id: string, fileName: string, size?: number | null, url: string, width?: number | null, height?: number | null }>, price?: { __typename?: 'RichText', raw: any } | null, flavour: Array<{ __typename?: 'Flavour', flavourName: string, dietary?: DietaryRestriction | null, flavourPrice?: { __typename?: 'RichText', raw: any } | null, flavourDescription?: { __typename?: 'RichText', raw: any } | null }>, shortDescription: { __typename?: 'RichText', raw: any }, fullDescription?: { __typename?: 'RichText', raw: any } | null }> }> };
+
 export type HomeDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type HomeDataQuery = { __typename?: 'Query', homePages: Array<{ __typename?: 'HomePage', welcome: string, slogan: { __typename?: 'RichText', raw: any } }> };
 
+export type SeasonalDataQueryVariables = Exact<{ [key: string]: never; }>;
 
+
+export type SeasonalDataQuery = { __typename?: 'Query', seasonalDrops: Array<{ __typename?: 'SeasonalDrop', collectionName: string, pastCollection?: boolean | null, homepageDisplay?: boolean | null, collectionDescription: { __typename?: 'RichText', raw: any }, productList: Array<{ __typename?: 'Product', name: string, dietary: Array<DietaryRestriction>, photos: Array<{ __typename?: 'Asset', id: string, fileName: string, size?: number | null, url: string, width?: number | null, height?: number | null }>, price?: { __typename?: 'RichText', raw: any } | null, flavour: Array<{ __typename?: 'Flavour', flavourName: string, dietary?: DietaryRestriction | null, flavourPrice?: { __typename?: 'RichText', raw: any } | null, flavourDescription?: { __typename?: 'RichText', raw: any } | null }>, shortDescription: { __typename?: 'RichText', raw: any }, fullDescription?: { __typename?: 'RichText', raw: any } | null }> }> };
+
+
+export const FeaturedDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FeaturedData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"featuredLists"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"collectionName"}},{"kind":"Field","name":{"kind":"Name","value":"collectionDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"productList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"photos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"dietary"}},{"kind":"Field","name":{"kind":"Name","value":"flavour"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"flavourName"}},{"kind":"Field","name":{"kind":"Name","value":"flavourPrice"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"dietary"}},{"kind":"Field","name":{"kind":"Name","value":"flavourDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"shortDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fullDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}}]}}]}}]} as unknown as DocumentNode<FeaturedDataQuery, FeaturedDataQueryVariables>;
 export const HomeDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"HomeData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"homePages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"welcome"}},{"kind":"Field","name":{"kind":"Name","value":"slogan"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}}]}}]} as unknown as DocumentNode<HomeDataQuery, HomeDataQueryVariables>;
+export const SeasonalDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SeasonalData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"seasonalDrops"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"collectionName"}},{"kind":"Field","name":{"kind":"Name","value":"pastCollection"}},{"kind":"Field","name":{"kind":"Name","value":"homepageDisplay"}},{"kind":"Field","name":{"kind":"Name","value":"collectionDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"productList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"photos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"dietary"}},{"kind":"Field","name":{"kind":"Name","value":"flavour"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"flavourName"}},{"kind":"Field","name":{"kind":"Name","value":"flavourPrice"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"dietary"}},{"kind":"Field","name":{"kind":"Name","value":"flavourDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"shortDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fullDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}}]}}]}}]} as unknown as DocumentNode<SeasonalDataQuery, SeasonalDataQueryVariables>;

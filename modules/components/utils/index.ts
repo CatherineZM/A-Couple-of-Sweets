@@ -4,5 +4,6 @@ import H3 from "./h3";
 import H4 from "./h4";
 import Paragraph from "./paragraph";
 import Button from "./button";
+import RichTextRender from './richText'
 
-export { H1, H2, H3, H4, Paragraph, Button };
+export { H1, H2, H3, H4, Paragraph, Button, RichTextRender };

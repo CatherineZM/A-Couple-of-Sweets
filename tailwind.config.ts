@@ -30,7 +30,7 @@ const config: Config = {
                 ganache: "#3D2217",
             },
             spacing: {
-                navbar: "40px", // add the navbar height after set
+                navbar: "100px", // add the navbar height after set
                 mobileX: "16px",
                 tabletX: "60px",
                 desktopX: "120px",

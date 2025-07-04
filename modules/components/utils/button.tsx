@@ -1,7 +1,7 @@
 "use client";
 
 interface Props {
-    className: string;
+    className?: string;
     children: React.ReactNode;
     theme:'light' | 'dark'
     action?: any;

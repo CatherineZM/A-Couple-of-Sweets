@@ -33,6 +33,12 @@ export const SEASONAL_DATA = gql(`
                         raw
                     }
                 }
+                shortDescription {
+                    raw
+                }
+                fullDescription {
+                    raw
+                }
             }
         }
     }

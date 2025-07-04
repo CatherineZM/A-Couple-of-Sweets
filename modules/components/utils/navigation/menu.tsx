@@ -92,10 +92,10 @@ export default function Menu(): JSX.Element {
     const rightItems = menu.slice(2, 4);
 
     return (
-        <nav className='px-mobileX md:px-tabletX lg:px-desktopX 3xl:px-plusDesktopX w-full fixed z-40 h-[100px] bg-buttercream shadow-md duration-300 transition-all ease-in-out flex items-center justify-center'>
-            <div className='max-w-screen-xl w-full flex flex-row md:grid md:grid-cols-5 gap-x-10 justify-between items-end py-4'>
+        <nav className="px-mobileX md:px-tabletX lg:px-desktopX 3xl:px-plusDesktopX w-full fixed z-40 h-[100px] bg-buttercream shadow-md duration-300 transition-all ease-in-out flex items-center justify-center">
+            <div className="max-w-screen-xl w-full flex flex-row md:grid md:grid-cols-5 gap-x-10 justify-between items-center md:items-end py-4">
                 {/* Left Menu */}
-                <div className='hidden col-span-2 md:flex flex-row justify-between'>
+                <div className="hidden col-span-2 md:flex flex-row justify-between">
                     {leftItems.map((item) => (
                         <Link
                             key={item.id}
@@ -106,7 +106,7 @@ export default function Menu(): JSX.Element {
                                     ? "noopener noreferrer"
                                     : undefined
                             }
-                            className={`capitalize font-dmsans font-semibold text-xl md:text-[32px] duration-300 transition-all ease-in-out ${
+                            className={`capitalize font-dmsans font-semibold text-xl lg:text-[32px] duration-300 transition-all ease-in-out ${
                                 currentPath === item.href
                                     ? "text-olive underline"
                                     : "text-ganache hover:text-ganache/80 no-underline "
@@ -117,12 +117,12 @@ export default function Menu(): JSX.Element {
                 </div>
 
                 {/* Logo Centered */}
-                <div className='flex justify-center col-span-1'>
-                    <Link href='/'>
+                <div className="flex justify-center basis-1/2 sm:basis-1/3 md:col-span-1">
+                    <Link href="/">
                         <Image
-                            src='/a-couple-of-sweets.png'
-                            alt='A Couple Of Sweets'
-                            className='w-full h-auto'
+                            src="/a-couple-of-sweets.png"
+                            alt="A Couple Of Sweets"
+                            className="h-full w-auto md:w-full md:h-auto"
                             width={2641}
                             height={781}
                         />
@@ -130,7 +130,7 @@ export default function Menu(): JSX.Element {
                 </div>
 
                 {/* Right Menu */}
-                <div className='hidden col-span-2 md:flex flex-row justify-between'>
+                <div className="hidden col-span-2 md:flex flex-row justify-between">
                     {rightItems.map((item) => (
                         <Link
                             key={item.id}
@@ -141,7 +141,7 @@ export default function Menu(): JSX.Element {
                                     ? "noopener noreferrer"
                                     : undefined
                             }
-                            className={`capitalize font-dmsans font-semibold text-xl md:text-[32px] duration-300 transition-all ease-in-out ${
+                            className={`capitalize font-dmsans font-semibold text-xl lg:text-[32px] duration-300 transition-all ease-in-out ${
                                 currentPath === item.href
                                     ? "text-olive underline"
                                     : "text-ganache hover:text-ganache/80 no-underline "
@@ -152,7 +152,7 @@ export default function Menu(): JSX.Element {
                 </div>
 
                 {/* Mobile Menu */}
-                <div className='flex md:hidden'>
+                <div className="flex md:hidden">
                     <Link
                         key={menu[3].id}
                         href={menu[3].href}
@@ -162,7 +162,7 @@ export default function Menu(): JSX.Element {
                                 ? "noopener noreferrer"
                                 : undefined
                         }
-                        className={`capitalize font-dmsans font-semibold text-xl md:text-[32px] duration-300 transition-all ease-in-out ${
+                        className={`capitalize font-dmsans font-semibold text-xl lg:text-[32px] duration-300 transition-all ease-in-out ${
                             currentPath === menu[3].href
                                 ? "text-olive underline"
                                 : "text-ganache hover:text-ganache/80 no-underline "
