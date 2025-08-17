@@ -93,7 +93,7 @@ export default function Menu(): JSX.Element {
 
     return (
         <nav className="py-3 px-mobileX md:px-tabletX lg:px-desktopX 3xl:px-plusDesktopX w-full fixed z-40 h-[80px] bg-buttercream shadow-md duration-300 transition-all ease-in-out flex items-center justify-center">
-            <div className="max-w-screen-xl w-full flex flex-row md:grid md:grid-cols-5 md:gap-x-10 justify-between items-center md:items-end h-full">
+            <div className="max-w-screen-2xl w-full flex flex-row md:grid md:grid-cols-5 md:gap-x-10 justify-between items-center md:items-end h-full">
                 {/* Left Menu */}
                 <div className="hidden col-span-2 md:flex flex-row justify-between">
                     {leftItems.map((item) => (

@@ -47,7 +47,7 @@ export default function CollectionRow (props: Props): JSX.Element {
     if (!mounted) return <></>;
 
     return (
-        <div className="flex flex-col md:flex-row md:items-stretch h-full gap-y-3 md:gap-x-6 w-full">
+        <div className="max-w-screen-2xl flex flex-col md:flex-row md:items-stretch h-full gap-y-3 md:gap-x-6 w-full">
             <div
                 className={`${props.theme.bgColor} flex flex-col py-3 md:py-8 px-4 basis-full md:basis-1/4 rounded-xl gap-y-2 md:gap-y-4 justify-center md:min-h-full text-center md:text-start`}>
                 <H2 className={`${props.theme.titleColor} `}>{props.name}</H2>

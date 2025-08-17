@@ -82,14 +82,14 @@ export default async function Home(): Promise<JSX.Element> {
                 ))}
             </div>
             <div className="py-navbar px-mobileX md:px-tabletX lg:px-desktopX 3xl:px-plusDesktopX flex flex-col gap-y-6">
-                <div className="flex flex-col w-full justify-center items-center pt-8 md:py-8 gap-y-3">
+                <div className="max-w-screen-2xl flex flex-col w-full justify-center items-center pt-8 md:py-8 gap-y-3">
                     <H1 className="font-dmsans text-center">{home.welcome}</H1>
                     <RichTextRender
                         content={home.slogan.raw}
                         className="font-dmsans text-center"
                     />
                 </div>
-                <div className="w-full border-y border-t-ganache border-b-ganache text-ganache py-5 px-2">
+                <div className="max-w-screen-2xl w-full border-y border-t-ganache border-b-ganache text-ganache py-5 px-2">
                     <HomeAnnouncement announcement={home.announcement} />
                 </div>
                 <CollectionRow

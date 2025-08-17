@@ -7,14 +7,16 @@ interface Props {
     action?: any;
     fill?: boolean;
     disabled?: any;
+    type?: any
 }
 
 export default function Button(props: Props): JSX.Element {
-    const { className, action, children, theme, fill, disabled } = props;
+    const { className, action, children, theme, fill, disabled, type } = props;
 
     return (
         <button
             onClick={action}
+            type={type}
             className={`${className} border-2 rounded-2xl duration-300 transition-all ease-in-out
                 ${
                     theme === "dark"
