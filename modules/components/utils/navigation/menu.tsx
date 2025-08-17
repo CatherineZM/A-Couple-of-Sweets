@@ -92,8 +92,8 @@ export default function Menu(): JSX.Element {
     const rightItems = menu.slice(2, 4);
 
     return (
-        <nav className="px-mobileX md:px-tabletX lg:px-desktopX 3xl:px-plusDesktopX w-full fixed z-40 h-[100px] bg-buttercream shadow-md duration-300 transition-all ease-in-out flex items-center justify-center">
-            <div className="max-w-screen-xl w-full flex flex-row md:grid md:grid-cols-5 gap-x-10 justify-between items-center md:items-end py-4">
+        <nav className="py-3 px-mobileX md:px-tabletX lg:px-desktopX 3xl:px-plusDesktopX w-full fixed z-40 h-[80px] bg-buttercream shadow-md duration-300 transition-all ease-in-out flex items-center justify-center">
+            <div className="max-w-screen-xl w-full flex flex-row md:grid md:grid-cols-5 md:gap-x-10 justify-between items-center md:items-end h-full">
                 {/* Left Menu */}
                 <div className="hidden col-span-2 md:flex flex-row justify-between">
                     {leftItems.map((item) => (
@@ -106,10 +106,10 @@ export default function Menu(): JSX.Element {
                                     ? "noopener noreferrer"
                                     : undefined
                             }
-                            className={`capitalize font-dmsans font-semibold text-xl lg:text-[32px] duration-300 transition-all ease-in-out ${
+                            className={`capitalize font-dmsans font-semibold text-xl lg:text-2xl duration-300 transition-all ease-in-out border-b-2 ${
                                 currentPath === item.href
-                                    ? "text-olive underline"
-                                    : "text-ganache hover:text-ganache/80 no-underline "
+                                    ? "text-olive border-olive"
+                                    : "text-ganache border-transparent hover:text-ganache/80 hover:border-ganache/80 "
                             }`}>
                             {item.name}
                         </Link>
@@ -117,12 +117,12 @@ export default function Menu(): JSX.Element {
                 </div>
 
                 {/* Logo Centered */}
-                <div className="flex justify-center basis-1/2 sm:basis-1/3 md:col-span-1">
+                <div className="flex justify-start md:justify-center basis-1/2 sm:basis-1/3 md:col-span-1">
                     <Link href="/">
                         <Image
                             src="/a-couple-of-sweets.png"
                             alt="A Couple Of Sweets"
-                            className="h-full w-auto md:w-full md:h-auto"
+                            className="h-14 w-auto object-contain"
                             width={2641}
                             height={781}
                         />
@@ -141,10 +141,10 @@ export default function Menu(): JSX.Element {
                                     ? "noopener noreferrer"
                                     : undefined
                             }
-                            className={`capitalize font-dmsans font-semibold text-xl lg:text-[32px] duration-300 transition-all ease-in-out ${
+                            className={`capitalize font-dmsans font-semibold text-xl lg:text-2xl duration-300 transition-all ease-in-out border-b-2 ${
                                 currentPath === item.href
-                                    ? "text-olive underline"
-                                    : "text-ganache hover:text-ganache/80 no-underline "
+                                    ? "text-olive border-olive"
+                                    : "text-ganache border-transparent hover:text-ganache/80 hover:border-ganache/80 "
                             }`}>
                             {item.name}
                         </Link>

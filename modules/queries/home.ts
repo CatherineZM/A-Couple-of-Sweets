@@ -7,6 +7,9 @@ export const HOME_DATA = gql(`
             slogan {
                 raw
             }
+            announcement {
+                raw
+            }
         }
     }
 `);

@@ -13,14 +13,15 @@ export default function ProductCard (props: Props): JSX.Element {
     const { product } = props
 
     return (
-        <div className="flex-grow h-full flex flex-col gap-y-2.5">
+        <div className="flex flex-col h-full w-full gap-y-2.5">
             {product.photos[0] && (
                 <Image
-                    src={product.photos[0].url}
+                    src={`${product.photos[0].url}`}
                     alt={product.photos[0].fileName}
-                    width={product.photos[0].width ?? 800}
-                    height={product.photos[0].height ?? 800}
-                    className="aspect-square w-full h-auto object-cover"
+                    width={800}
+                    height={800}
+                    sizes="25vw, (min-width: 1024px) 50vw"
+                    className="aspect-square w-full object-cover rounded-lg"
                 />
             )}
             <Paragraph strong className="">

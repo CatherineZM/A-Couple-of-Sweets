@@ -11,6 +11,7 @@ import "./globals.css";
 // font
 import { Marcellus, DM_Sans } from "next/font/google";
 import Menu from "@/modules/components/utils/navigation/menu";
+import Footer from "@/modules/components/utils/footer/footer";
 
 const marcellus = Marcellus({
     weight: ["400"],
@@ -42,6 +43,7 @@ export default function RootLayout({
                 className={`${marcellus.variable} ${dmSans.variable}`}>
                     <Menu />
                     <SmoothScrolling>{children}</SmoothScrolling>
+                    <Footer />
             </body>
         </html>
     );

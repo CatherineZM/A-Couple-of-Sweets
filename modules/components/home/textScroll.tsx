@@ -42,7 +42,7 @@ export default function HorizontalScrollCp({
     const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
         clamp: false,
     });
-    const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
+    const x = useTransform(baseX, (v) => `${wrap(-200, 0, v)}%`);
     const directionFactor = useRef<number>(1);
     useAnimationFrame((t, delta) => {
         const bv =
@@ -83,9 +83,9 @@ export default function HorizontalScrollCp({
     return (
         <div className="flex no-wrap overflow-hidden whitespace-nowrap">
             <motion.div
-                className="flex gap-x-4 whitespace-nowrap"
+                className="flex gap-x-4 whitespace-nowrap min-w-[200%]"
                 style={{ x }}>
-                {Array.from({ length: numberOfRepetitions }).map((_, index) => (
+                {Array.from({ length: numberOfRepetitions * 3 }).map((_, index) => (
                     <span
                         key={index}
                         className="flex items-center gap-x-4 text-lsa-dark">

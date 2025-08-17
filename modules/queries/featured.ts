@@ -12,9 +12,17 @@ export const FEATURED_DATA = gql(`
                     id
                     fileName
                     size
-                    url
                     width
                     height
+                    url(transformation: {
+                        image: {
+                            resize: {
+                                width: 800
+                                height: 800
+                                fit: crop
+                            }
+                        }
+                    })
                 }
                 name
                 price {
