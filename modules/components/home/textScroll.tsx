@@ -6,7 +6,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 
-// motion 
+// motion
 import {
     motion,
     useScroll,
@@ -27,7 +27,7 @@ interface ParallaxProps {
 export default function HorizontalScrollCp({
     text,
     baseVelocity = 5,
-    images
+    images,
 }: ParallaxProps): JSX.Element {
     const [numberOfRepetitions, setNumberOfRepetitions] = useState(0);
 
@@ -81,34 +81,36 @@ export default function HorizontalScrollCp({
     }, []);
 
     return (
-        <div className="flex no-wrap overflow-hidden whitespace-nowrap">
+        <div className='flex no-wrap overflow-hidden whitespace-nowrap'>
             <motion.div
-                className="flex gap-x-4 whitespace-nowrap min-w-[200%]"
+                className='flex gap-x-4 whitespace-nowrap min-w-[200%]'
                 style={{ x }}>
-                {Array.from({ length: numberOfRepetitions * 3 }).map((_, index) => (
-                    <span
-                        key={index}
-                        className="flex items-center gap-x-4 text-lsa-dark">
-                        {text.map((item, i) => (
-                            <React.Fragment key={i}>
-                                <span className="font-dmsans font-semibold text-lg md:text-2xl text-ganache">
-                                    {item}
-                                </span>
-                                {images?.[i] && (
-                                    <span className="relative inline-block w-14 h-14 align-middle">
-                                        <Image
-                                            src={images[i]}
-                                            alt={`icon-${i}`}
-                                            width={56}
-                                            height={56}
-                                            className="object-contain"
-                                        />
+                {Array.from({ length: numberOfRepetitions * 3 }).map(
+                    (_, index) => (
+                        <div
+                            key={index}
+                            className='flex flex-row items-center gap-x-3.5 text-ganache'>
+                            {text.map((item, i) => (
+                                <React.Fragment key={i}>
+                                    <span className='font-dmsans font-semibold text-lg md:text-2xl text-ganache'>
+                                        {item}
                                     </span>
-                                )}
-                            </React.Fragment>
-                        ))}
-                    </span>
-                ))}
+                                    {images?.[i] && (
+                                        <span className='relative w-12 h-12 align-middle inline-flex items-center justify-center'>
+                                            <Image
+                                                src={images[i]}
+                                                alt={`icon-${i}`}
+                                                width={56}
+                                                height={56}
+                                                className='object-contain'
+                                            />
+                                        </span>
+                                    )}
+                                </React.Fragment>
+                            ))}
+                        </div>
+                    )
+                )}
             </motion.div>
         </div>
     );

@@ -52,9 +52,9 @@ export default async function Home(): Promise<JSX.Element> {
         },
         {
             icon: "/icons/pistachio.png",
-            className: "top-[25%] -left-[3%] md:top-[20%] md:left-[90%]",
+            className: "top-[25%] -left-[5%] md:top-[20%] md:left-[85%]",
             svgClassName: "w-[20vw] md:w-[10vw] md:max-w-[60%] xl:max-w-[70%]",
-            xRange: 10,
+            xRange: 6,
             yRange: 20,
             duration: 3,
         },
@@ -98,7 +98,7 @@ export default async function Home(): Promise<JSX.Element> {
                     productList={seasonal[0].productList}
                     theme={theme.green}
                 />
-                <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw]">
+                <div className="w-[99vw] relative left-1/2 right-1/2 -mx-[50vw] overflow-x-clip">
                     <hr className="border-t border-ganache/70 my-3" />
                     <TextScroll
                         text={["Natural Ingredients", "Natural Ingredients"]}

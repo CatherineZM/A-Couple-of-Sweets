@@ -44,6 +44,9 @@ export default function RootLayout({
                     <Menu />
                     <SmoothScrolling>{children}</SmoothScrolling>
                     <Footer />
+                    <div className='flex justify-center w-full border-t border-ganache bg-cream py-2'>
+                    © 2025 A Couple Of Sweets. All rights reserved.
+                </div>
             </body>
         </html>
     );

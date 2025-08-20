@@ -46,7 +46,7 @@ export default function FooterIntro({
                         <Link
                             href='https://www.instagram.com/a_couple_ofsweets?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=='
                             target='_blank'>
-                            <Paragraph strong className="border-b-2 border-b-ganache hover:border-b-transparent duration-300 transition-all ease-in-out">@a_couple_ofsweets</Paragraph>
+                            <Paragraph strong className="hover:text-olive duration-300 transition-all ease-in-out">@a_couple_ofsweets</Paragraph>
                         </Link>
                     </div>
                 </div>
