@@ -1,8 +1,11 @@
+"use client"
+import { useState } from "react";
+
 // types
 import { Product, DietaryRestriction } from "@/modules/gql/graphql";
 
 // internal components
-import { Paragraph, RichTextRender, CldImage } from "@/modules/components/utils/index";
+import { Paragraph, RichTextRender, CldImage, Button } from "@/modules/components/utils/index";
 
 // external components
 import { LuWheatOff, LuMilkOff, LuNutOff } from "react-icons/lu";
@@ -12,7 +15,8 @@ interface Props {
 }
 
 export default function ProductCard (props: Props): JSX.Element {
-    const { product } = props
+    const { product } = props;
+    const [open, setOpen] = useState(false);
 
     return (
         <div className="flex flex-col h-full w-full gap-y-2.5">
@@ -58,6 +62,20 @@ export default function ProductCard (props: Props): JSX.Element {
             </div>
 
             <RichTextRender content={product.shortDescription.raw} />
+            <Button
+                action={() =>
+                    window.open(
+                        "https://www.instagram.com/a_couple_ofsweets?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+                        "_blank"
+                    )
+                }
+                fill
+                theme="dark">
+                Order Now
+            </Button>
+            <Button action={() => setOpen(true)} type="button" theme="dark">
+                Read More
+            </Button>
         </div>
     );
 }
