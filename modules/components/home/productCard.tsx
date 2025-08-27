@@ -3,7 +3,7 @@ import { Product } from "@/modules/gql/graphql";
 
 // components
 import { Paragraph, RichTextRender } from "@/modules/components/utils/index";
-import Image from "next/image";
+import CldImage from "../utils/cldImg";
 
 interface Props {
     product: Product;
@@ -14,10 +14,10 @@ export default function ProductCard (props: Props): JSX.Element {
 
     return (
         <div className="flex flex-col h-full w-full gap-y-2.5">
-            {product.photos[0] && (
-                <Image
-                    src={`${product.photos[0].url}`}
-                    alt={product.photos[0].fileName}
+            {product.productPhoto[0] && (
+                <CldImage
+                    src={product.productPhoto[0].url}
+                    alt={product.name}
                     width={800}
                     height={800}
                     sizes="25vw, (min-width: 1024px) 50vw"

@@ -8,22 +8,7 @@ export const FEATURED_DATA = gql(`
                 raw
             }
             productList {
-                photos {
-                    id
-                    fileName
-                    size
-                    width
-                    height
-                    url(transformation: {
-                        image: {
-                            resize: {
-                                width: 800
-                                height: 800
-                                fit: crop
-                            }
-                        }
-                    })
-                }
+                productPhoto
                 name
                 price {
                     raw

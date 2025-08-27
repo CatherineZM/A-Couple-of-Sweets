@@ -469,6 +469,7 @@ export type AboutSection = Entity & {
   description: RichText;
   /** The unique identifier */
   id: Scalars['ID']['output'];
+  image: Array<Scalars['Json']['output']>;
   /** Picture to be shown in this section */
   picture?: Maybe<Asset>;
   /** System stage field */
@@ -503,6 +504,7 @@ export type AboutSectionConnection = {
 
 export type AboutSectionCreateInput = {
   description: Scalars['RichTextAST']['input'];
+  image: Array<Scalars['Json']['input']>;
   picture?: InputMaybe<AssetCreateOneInlineInput>;
   title: Scalars['String']['input'];
 };
@@ -562,6 +564,15 @@ export type AboutSectionManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given json path. */
+  image_json_path_exists?: InputMaybe<Scalars['String']['input']>;
+  /**
+   * Recursively tries to find the provided JSON scalar value inside the field.
+   * It does use an exact match when comparing values.
+   * If you pass `null` as value the filter will be ignored.
+   * Note: This filter fails if you try to look for a non scalar JSON value!
+   */
+  image_value_recursive?: InputMaybe<Scalars['Json']['input']>;
   picture?: InputMaybe<AssetWhereInput>;
   title?: InputMaybe<Scalars['String']['input']>;
   /** All values containing the given string. */
@@ -673,6 +684,7 @@ export type AboutSectionParentWhereUniqueInput = {
 
 export type AboutSectionUpdateInput = {
   description?: InputMaybe<Scalars['RichTextAST']['input']>;
+  image?: InputMaybe<Array<Scalars['Json']['input']>>;
   picture?: InputMaybe<AssetUpdateOneInlineInput>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
@@ -690,6 +702,7 @@ export type AboutSectionUpdateManyInlineInput = {
 
 export type AboutSectionUpdateManyInput = {
   description?: InputMaybe<Scalars['RichTextAST']['input']>;
+  image?: InputMaybe<Array<Scalars['Json']['input']>>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -779,6 +792,15 @@ export type AboutSectionWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given json path. */
+  image_json_path_exists?: InputMaybe<Scalars['String']['input']>;
+  /**
+   * Recursively tries to find the provided JSON scalar value inside the field.
+   * It does use an exact match when comparing values.
+   * If you pass `null` as value the filter will be ignored.
+   * Note: This filter fails if you try to look for a non scalar JSON value!
+   */
+  image_value_recursive?: InputMaybe<Scalars['Json']['input']>;
   picture?: InputMaybe<AssetWhereInput>;
   title?: InputMaybe<Scalars['String']['input']>;
   /** All values containing the given string. */
@@ -960,7 +982,6 @@ export type AssetCreateInput = {
   fileName?: InputMaybe<Scalars['String']['input']>;
   /** Inline mutations for managing document localizations excluding the default locale */
   localizations?: InputMaybe<AssetCreateLocalizationsInput>;
-  photosProduct?: InputMaybe<ProductCreateManyInlineInput>;
   pictureAboutSection?: InputMaybe<AboutSectionCreateManyInlineInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** Optionally the system can upload a file for you, for that you need to provide a publicly accessible url */
@@ -1141,7 +1162,6 @@ export type AssetUpdateInput = {
   fileName?: InputMaybe<Scalars['String']['input']>;
   /** Manage document localizations */
   localizations?: InputMaybe<AssetUpdateLocalizationsInput>;
-  photosProduct?: InputMaybe<ProductUpdateManyInlineInput>;
   pictureAboutSection?: InputMaybe<AboutSectionUpdateManyInlineInput>;
   /** Use this to define if its a reupload for the asset */
   reUpload?: InputMaybe<Scalars['Boolean']['input']>;
@@ -5196,9 +5216,9 @@ export type Product = Entity & {
   id: Scalars['ID']['output'];
   /** The name of the item */
   name: Scalars['String']['output'];
-  photos: Array<Asset>;
   /** Price of the item */
   price?: Maybe<RichText>;
+  productPhoto: Array<Scalars['Json']['output']>;
   /** A short description of the item that includes only the main ingredients. A full description will be included later. */
   shortDescription: RichText;
   /** System stage field */
@@ -5216,19 +5236,6 @@ export type ProductFlavourArgs = {
   orderBy?: InputMaybe<FlavourOrderByInput>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<FlavourWhereInput>;
-};
-
-
-export type ProductPhotosArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  locales?: InputMaybe<Array<Locale>>;
-  orderBy?: InputMaybe<AssetOrderByInput>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<AssetWhereInput>;
 };
 
 export type ProductConnectInput = {
@@ -5253,8 +5260,8 @@ export type ProductCreateInput = {
   flavour?: InputMaybe<FlavourCreateManyInlineInput>;
   fullDescription?: InputMaybe<Scalars['RichTextAST']['input']>;
   name: Scalars['String']['input'];
-  photos?: InputMaybe<AssetCreateManyInlineInput>;
   price?: InputMaybe<Scalars['RichTextAST']['input']>;
+  productPhoto?: InputMaybe<Array<Scalars['Json']['input']>>;
   shortDescription: Scalars['RichTextAST']['input'];
 };
 
@@ -5345,9 +5352,15 @@ export type ProductManyWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']['input']>;
-  photos_every?: InputMaybe<AssetWhereInput>;
-  photos_none?: InputMaybe<AssetWhereInput>;
-  photos_some?: InputMaybe<AssetWhereInput>;
+  /** All values containing the given json path. */
+  productPhoto_json_path_exists?: InputMaybe<Scalars['String']['input']>;
+  /**
+   * Recursively tries to find the provided JSON scalar value inside the field.
+   * It does use an exact match when comparing values.
+   * If you pass `null` as value the filter will be ignored.
+   * Note: This filter fails if you try to look for a non scalar JSON value!
+   */
+  productPhoto_value_recursive?: InputMaybe<Scalars['Json']['input']>;
 };
 
 export enum ProductOrderByInput {
@@ -5452,8 +5465,8 @@ export type ProductUpdateInput = {
   flavour?: InputMaybe<FlavourUpdateManyInlineInput>;
   fullDescription?: InputMaybe<Scalars['RichTextAST']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  photos?: InputMaybe<AssetUpdateManyInlineInput>;
   price?: InputMaybe<Scalars['RichTextAST']['input']>;
+  productPhoto?: InputMaybe<Array<Scalars['Json']['input']>>;
   shortDescription?: InputMaybe<Scalars['RichTextAST']['input']>;
 };
 
@@ -5473,6 +5486,7 @@ export type ProductUpdateManyInput = {
   fullDescription?: InputMaybe<Scalars['RichTextAST']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   price?: InputMaybe<Scalars['RichTextAST']['input']>;
+  productPhoto?: InputMaybe<Array<Scalars['Json']['input']>>;
   shortDescription?: InputMaybe<Scalars['RichTextAST']['input']>;
 };
 
@@ -5594,9 +5608,15 @@ export type ProductWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']['input']>;
-  photos_every?: InputMaybe<AssetWhereInput>;
-  photos_none?: InputMaybe<AssetWhereInput>;
-  photos_some?: InputMaybe<AssetWhereInput>;
+  /** All values containing the given json path. */
+  productPhoto_json_path_exists?: InputMaybe<Scalars['String']['input']>;
+  /**
+   * Recursively tries to find the provided JSON scalar value inside the field.
+   * It does use an exact match when comparing values.
+   * If you pass `null` as value the filter will be ignored.
+   * Note: This filter fails if you try to look for a non scalar JSON value!
+   */
+  productPhoto_value_recursive?: InputMaybe<Scalars['Json']['input']>;
 };
 
 /** References Product record uniquely */
@@ -8126,7 +8146,7 @@ export type FooterDataQuery = { __typename?: 'Query', contactInfos: Array<{ __ty
 export type FeaturedDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FeaturedDataQuery = { __typename?: 'Query', featuredLists: Array<{ __typename?: 'FeaturedList', collectionName: string, collectionDescription?: { __typename?: 'RichText', raw: any } | null, productList: Array<{ __typename?: 'Product', name: string, dietary: Array<DietaryRestriction>, photos: Array<{ __typename?: 'Asset', id: string, fileName: string, size?: number | null, width?: number | null, height?: number | null, url: string }>, price?: { __typename?: 'RichText', raw: any } | null, flavour: Array<{ __typename?: 'Flavour', flavourName: string, dietary?: DietaryRestriction | null, flavourPrice?: { __typename?: 'RichText', raw: any } | null, flavourDescription?: { __typename?: 'RichText', raw: any } | null }>, shortDescription: { __typename?: 'RichText', raw: any }, fullDescription?: { __typename?: 'RichText', raw: any } | null }> }> };
+export type FeaturedDataQuery = { __typename?: 'Query', featuredLists: Array<{ __typename?: 'FeaturedList', collectionName: string, collectionDescription?: { __typename?: 'RichText', raw: any } | null, productList: Array<{ __typename?: 'Product', productPhoto: Array<any>, name: string, dietary: Array<DietaryRestriction>, price?: { __typename?: 'RichText', raw: any } | null, flavour: Array<{ __typename?: 'Flavour', flavourName: string, dietary?: DietaryRestriction | null, flavourPrice?: { __typename?: 'RichText', raw: any } | null, flavourDescription?: { __typename?: 'RichText', raw: any } | null }>, shortDescription: { __typename?: 'RichText', raw: any }, fullDescription?: { __typename?: 'RichText', raw: any } | null }> }> };
 
 export type HomeDataQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -8136,11 +8156,11 @@ export type HomeDataQuery = { __typename?: 'Query', homePages: Array<{ __typenam
 export type SeasonalDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SeasonalDataQuery = { __typename?: 'Query', seasonalDrops: Array<{ __typename?: 'SeasonalDrop', collectionName: string, pastCollection?: boolean | null, homepageDisplay?: boolean | null, collectionDescription: { __typename?: 'RichText', raw: any }, productList: Array<{ __typename?: 'Product', name: string, dietary: Array<DietaryRestriction>, photos: Array<{ __typename?: 'Asset', id: string, fileName: string, size?: number | null, url: string, width?: number | null, height?: number | null }>, price?: { __typename?: 'RichText', raw: any } | null, flavour: Array<{ __typename?: 'Flavour', flavourName: string, dietary?: DietaryRestriction | null, flavourPrice?: { __typename?: 'RichText', raw: any } | null, flavourDescription?: { __typename?: 'RichText', raw: any } | null }>, shortDescription: { __typename?: 'RichText', raw: any }, fullDescription?: { __typename?: 'RichText', raw: any } | null }> }> };
+export type SeasonalDataQuery = { __typename?: 'Query', seasonalDrops: Array<{ __typename?: 'SeasonalDrop', collectionName: string, pastCollection?: boolean | null, homepageDisplay?: boolean | null, collectionDescription: { __typename?: 'RichText', raw: any }, productList: Array<{ __typename?: 'Product', productPhoto: Array<any>, name: string, dietary: Array<DietaryRestriction>, price?: { __typename?: 'RichText', raw: any } | null, flavour: Array<{ __typename?: 'Flavour', flavourName: string, dietary?: DietaryRestriction | null, flavourPrice?: { __typename?: 'RichText', raw: any } | null, flavourDescription?: { __typename?: 'RichText', raw: any } | null }>, shortDescription: { __typename?: 'RichText', raw: any }, fullDescription?: { __typename?: 'RichText', raw: any } | null }> }> };
 
 
 export const CollectionDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CollectionData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"collectionsPages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}}]}}]} as unknown as DocumentNode<CollectionDataQuery, CollectionDataQueryVariables>;
 export const FooterDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FooterData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contactInfos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"bio"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"location"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"instagram"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<FooterDataQuery, FooterDataQueryVariables>;
-export const FeaturedDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FeaturedData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"featuredLists"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"collectionName"}},{"kind":"Field","name":{"kind":"Name","value":"collectionDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"productList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"photos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"800"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"800"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"crop"}}]}}]}}]}}]}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"dietary"}},{"kind":"Field","name":{"kind":"Name","value":"flavour"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"flavourName"}},{"kind":"Field","name":{"kind":"Name","value":"flavourPrice"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"dietary"}},{"kind":"Field","name":{"kind":"Name","value":"flavourDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"shortDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fullDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}}]}}]}}]} as unknown as DocumentNode<FeaturedDataQuery, FeaturedDataQueryVariables>;
+export const FeaturedDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FeaturedData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"featuredLists"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"collectionName"}},{"kind":"Field","name":{"kind":"Name","value":"collectionDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"productList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"productPhoto"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"dietary"}},{"kind":"Field","name":{"kind":"Name","value":"flavour"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"flavourName"}},{"kind":"Field","name":{"kind":"Name","value":"flavourPrice"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"dietary"}},{"kind":"Field","name":{"kind":"Name","value":"flavourDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"shortDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fullDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}}]}}]}}]} as unknown as DocumentNode<FeaturedDataQuery, FeaturedDataQueryVariables>;
 export const HomeDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"HomeData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"homePages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"welcome"}},{"kind":"Field","name":{"kind":"Name","value":"slogan"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"announcement"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}}]}}]} as unknown as DocumentNode<HomeDataQuery, HomeDataQueryVariables>;
-export const SeasonalDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SeasonalData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"seasonalDrops"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"collectionName"}},{"kind":"Field","name":{"kind":"Name","value":"pastCollection"}},{"kind":"Field","name":{"kind":"Name","value":"homepageDisplay"}},{"kind":"Field","name":{"kind":"Name","value":"collectionDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"productList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"photos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"dietary"}},{"kind":"Field","name":{"kind":"Name","value":"flavour"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"flavourName"}},{"kind":"Field","name":{"kind":"Name","value":"flavourPrice"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"dietary"}},{"kind":"Field","name":{"kind":"Name","value":"flavourDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"shortDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fullDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}}]}}]}}]} as unknown as DocumentNode<SeasonalDataQuery, SeasonalDataQueryVariables>;
+export const SeasonalDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SeasonalData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"seasonalDrops"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"collectionName"}},{"kind":"Field","name":{"kind":"Name","value":"pastCollection"}},{"kind":"Field","name":{"kind":"Name","value":"homepageDisplay"}},{"kind":"Field","name":{"kind":"Name","value":"collectionDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"productList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"productPhoto"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"dietary"}},{"kind":"Field","name":{"kind":"Name","value":"flavour"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"flavourName"}},{"kind":"Field","name":{"kind":"Name","value":"flavourPrice"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"dietary"}},{"kind":"Field","name":{"kind":"Name","value":"flavourDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"shortDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fullDescription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}}]}}]}}]} as unknown as DocumentNode<SeasonalDataQuery, SeasonalDataQueryVariables>;
