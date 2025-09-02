@@ -30,3 +30,19 @@ html.lenis body {
 .productSwiper * {
    user-select: none;
 }
+
+.popupSwiper .swiper-wrapper{
+    padding-bottom: 30px
+}
+
+.popupSwiper .swiper-pagination{
+    bottom: 0px
+}
+
+.popupSwiper .swiper-pagination-bullet{
+    background-color: #BAB86C;
+}
+
+.popupSwiper .swiper-pagination-bullet-active{
+    background-color: #4F5626;
+}

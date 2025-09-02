@@ -34,12 +34,12 @@ export default function CollectionDisplay(props: Props): JSX.Element {
             <div
                 className={`${
                     productLessThan4
-                        ? "flex justify-between gap-x-24"
-                        : "grid grid-cols-4 gap-x-14"
+                        ? "grid auto-cols-max grid-flow-col justify-between"
+                        : "grid grid-cols-4 gap-x-14 gap-y-6"
                 } 
                 w-full`}>
                 {products.map((product, index) => (
-                    <ProductCard product={product} key={index} />
+                    <ProductCard product={product} key={index} collection={title}/>
                 ))}
             </div>
         </div>
