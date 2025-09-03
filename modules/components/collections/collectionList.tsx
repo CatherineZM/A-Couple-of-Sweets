@@ -134,24 +134,27 @@ export default function SeasonalTabs({ seasonal, featured }: Props) {
             <div
                 role='tablist'
                 aria-label='Collections'
-                className='flex flex-row gap-2 border-b w-full justify-center'>
+                className='flex flex-row gap-1 md:gap-2 border-b w-full justify-between md:justify-center'>
                 {tabs.map((t) => {
                     const isActive = active === t.id;
                     return (
                         <button
                             key={t.id}
-                            role='tab'
+                            role="tab"
                             aria-selected={isActive}
                             aria-controls={`panel-${t.id}`}
                             id={`tab-${t.id}`}
                             onClick={() => setTab(t.id)}
                             className={[
-                                "px-4 py-2 -mb-px border-b-4 transition-colors",
+                                "px-0 md:px-4 py-2 -mb-px border-b-4 transition-colors",
                                 isActive
                                     ? "border-olive text-olive"
                                     : "border-transparent text-ganache hover:text-olive",
                             ].join(" ")}>
-                            <H3>{t.label}</H3>
+                            <h3
+                                className="font-dmsans font-semibold text-lg md:text-[32px]">
+                                {t.label}
+                            </h3>
                         </button>
                     );
                 })}

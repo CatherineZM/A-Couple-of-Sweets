@@ -24,7 +24,7 @@ export default function PopupModal(props: popupProps): JSX.Element | null {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}>
             <motion.div
-                className='bg-cream rounded-lg shadow-lg p-3 md:p-6 w-[90%] md:w-1/2 relative '
+                className='bg-cream rounded-lg shadow-lg p-3 md:p-6 w-[90%] md:w-[60%] relative '
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
@@ -39,7 +39,7 @@ export default function PopupModal(props: popupProps): JSX.Element | null {
                     </button>
                 </div>
 
-                <div className='z-50 max-h-[75vh] w-full'>
+                <div className='z-50 max-h-[95vh] md:max-h-[75vh] w-full'>
                     {children}
                 </div>
             </motion.div>

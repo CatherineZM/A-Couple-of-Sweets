@@ -39,11 +39,11 @@ export default async function Collections(): Promise<JSX.Element> {
                             ),
                         }}
                     />
-                    <div className='flex flex-row gap-4'>
+                    <div className='flex flex-row gap-x-1 justify-between md:justify-normal md:gap-4'>
                         {dietaryFlags.map(({ icon: Icon, label }) => (
                             <div
                                 key={label}
-                                className='flex flex-row items-center gap-2'>
+                                className='flex flex-row items-center gap-x-0.5 md:gap-2'>
                                 <div className='flex items-center justify-center border-2 rounded-full border-olive h-7 w-7'>
                                     <Icon className='text-olive h-5 w-5' />
                                 </div>
