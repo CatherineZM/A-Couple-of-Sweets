@@ -10,9 +10,10 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 
 // internal component
-import { H3, Paragraph } from "@/modules/components/utils";
+import { Button, H4, Paragraph } from "@/modules/components/utils";
 import CollectionDisplay from "@/modules/components/collections/collectionDisplay";
-import CollectionAccordion from "@/modules/components/collections/collectionAccordion";
+
+const toSlug = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
 
 interface Props {
     seasonal: Array<{
@@ -22,11 +23,11 @@ interface Props {
         collectionDescription: { raw: any };
         productList: Array<Product>;
     }>;
-    featured: {
+    featured: Array<{
         collectionName: string;
         collectionDescription?: { raw: any };
         productList: Array<Product>;
-    };
+    }>;
 }
 
 export default function SeasonalTabs({ seasonal, featured }: Props) {
@@ -52,6 +53,8 @@ export default function SeasonalTabs({ seasonal, featured }: Props) {
         { id: "past", label: "Past Seasonal" },
     ];
 
+    // primary tab ("utm") stays as-is below
+
     const currentParam = searchParams.get("utm") ?? tabs[0].id;
     const active = tabs.some((t) => t.id === currentParam)
         ? currentParam
@@ -61,6 +64,7 @@ export default function SeasonalTabs({ seasonal, featured }: Props) {
         (id: string) => {
             const params = new URLSearchParams(searchParams.toString());
             params.set("utm", id);
+            params.delete("col"); // reset secondary tab on primary change
             startTransition(() => {
                 router.replace(`${pathname}?${params.toString()}`, {
                     scroll: false,
@@ -70,67 +74,81 @@ export default function SeasonalTabs({ seasonal, featured }: Props) {
         [router, pathname, searchParams]
     );
 
-    const renderCollections = (cols: Props["seasonal"], emptyText: string) => {
+    const collectionsForActiveTab = useMemo(() => {
+        if (active === "current") return currentCollections;
+        if (active === "all-time") return featured;
+        return pastCollections;
+    }, [active, currentCollections, featured, pastCollections]);
+
+    const subTabs = useMemo(() =>
+        collectionsForActiveTab.map(c => ({ id: toSlug(c.collectionName), label: c.collectionName })),
+        [collectionsForActiveTab]
+    );
+
+    const currentColParam = searchParams.get("col");
+    const activeSub = subTabs.some(t => t.id === currentColParam)
+        ? (currentColParam as string)
+        : (subTabs[0]?.id ?? undefined);
+
+    const setSubTab = useCallback(
+        (id: string) => {
+            const params = new URLSearchParams(searchParams.toString());
+            params.set("utm", active); // ensure current primary tab persists
+            params.set("col", id);
+            startTransition(() => {
+                router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+            });
+        },
+        [router, pathname, searchParams, active]
+    );
+
+    const renderCollections = (
+        cols: Props["seasonal"] | Props["featured"],
+        emptyText: string,
+        selectedId?: string
+    ) => {
         if (!cols.length) return <p className='text-ganache'>{emptyText}</p>;
-        if (cols.length > 1) {
-            return (
-                <div>
-                    <CollectionAccordion
-                        items={cols.map((col) => ({
-                            id: col.collectionName
-                                .toLowerCase()
-                                .replace(/\s+/g, "-"),
-                            title: col.collectionName,
-                            content: (
-                                <CollectionDisplay
-                                    key={col.collectionName}
-                                    title={col.collectionName}
-                                    description={col.collectionDescription}
-                                    products={col.productList}
-                                />
-                            ),
-                        }))}
-                    />
-                </div>
-            );
-        } else {
-            return (
-                <CollectionDisplay
-                    title={cols[0].collectionName}
-                    description={cols[0].collectionDescription}
-                    products={cols[0].productList}
-                />
-            );
-        }
+
+        // Find selected collection; default to first
+        const targetId = selectedId && cols.some(c => toSlug(c.collectionName) === selectedId)
+            ? selectedId
+            : toSlug(cols[0].collectionName);
+
+        const selected = cols.find(c => toSlug(c.collectionName) === targetId)!;
+
+        return (
+            <CollectionDisplay
+                key={selected.collectionName}
+                title={selected.collectionName}
+                description={selected.collectionDescription}
+                products={selected.productList}
+            />
+        );
     };
 
     let content: React.ReactNode = null;
     if (active === "current") {
         content = renderCollections(
             currentCollections,
-            "Stay Tuned. New current seasonal collection is coming soon."
+            "Stay Tuned. New current seasonal collection is coming soon.",
+            activeSub
         );
     } else if (active === "all-time") {
-        content = featured ? (
-            <CollectionDisplay
-                title={featured.collectionName}
-                description={featured.collectionDescription}
-                products={featured.productList}
-            />
-        ) : (
-            <p className='text-ganache'>
-                Stay Tuned. New featured collection is coming soon.
-            </p>
+        content = renderCollections(
+            featured,
+            "Stay Tuned. New featured collection is coming soon.",
+            activeSub
         );
     } else {
         content = renderCollections(
             pastCollections,
-            "No past seasonal collections yet."
+            "No past seasonal collections yet.",
+            activeSub
         );
     }
 
     return (
-        <div className='max-w-screen-2xl py-10 w-full flex flex-col items-center'>
+        <div className='max-w-screen-2xl pt-10 w-full flex flex-col items-center'>
             <div
                 role='tablist'
                 aria-label='Collections'
@@ -160,16 +178,43 @@ export default function SeasonalTabs({ seasonal, featured }: Props) {
                 })}
             </div>
 
+            {/* Secondary tablist: collection names under the active primary tab */}
+            {(subTabs.length > 1) && (
+                <div
+                    role='tablist'
+                    aria-label={`${tabs.find(t => t.id === active)?.label} collections`}
+                    className='mt-4 flex flex-row gap-x-2 md:gap-x-6 w-full justify-center overflow-x-auto'>
+                    {subTabs.map((t) => {
+                        const isActive = activeSub === t.id;
+                        return (
+                            <Button key={t.id}
+                                type="tab"
+                                aria-selected={isActive}
+                                aria-controls={`sub-panel-${t.id}`}
+                                id={`sub-tab-${t.id}`}
+                                action={() => setSubTab(t.id)}
+                                isActive={isActive}
+                                theme="dark"
+                                className='py-2 px-2'
+                                >
+                                    <H4>{t.label}</H4>
+                                </Button>
+                        );
+                    })}
+                </div>
+            )}
+
             {/* Panel */}
             <motion.div
-                key={active}
-                id={`panel-${active}`}
+                key={`${active}-${activeSub ?? "first"}`}
+                id={`panel-${active}-${activeSub ?? "first"}`}
                 role='tabpanel'
-                aria-labelledby={`tab-${active}`}
+                aria-labelledby={`tab-${active}${activeSub ? ` sub-tab-${activeSub}` : ''}`}
                 initial='hidden'
                 animate='visible'
                 variants={fadeInVariant}
-                className='pt-6'>
+                className='pt-6'
+            >
                 {content}
                 <div className='mt-8 text-ganache'>
                     {isPending && (

@@ -9,13 +9,15 @@ interface Props {
     disabled?: any;
     type?: any
     isActive?: boolean;
+    id?: string
 }
 
 export default function Button(props: Props): JSX.Element {
-    const { className, action, children, theme, fill, disabled, type, isActive } = props;
+    const { className, action, children, theme, fill, disabled, type, isActive, id } = props;
 
     return (
         <button
+            id={id}
             onClick={action}
             type={type}
             aria-pressed={isActive || undefined}

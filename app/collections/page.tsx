@@ -17,7 +17,7 @@ export default async function Collections(): Promise<JSX.Element> {
     const Collection = getCollectionData();
 
     const seasonal = (await SeasonalData).productLists;
-    const featured = (await FeaturedData).featuredLists[0];
+    const featured = (await FeaturedData).featuredLists;
     const collection = (await Collection).collection[0];
 
     const dietaryFlags = [
@@ -28,7 +28,7 @@ export default async function Collections(): Promise<JSX.Element> {
 
     return (
         <div className='bg-cream'>
-            <div className='py-navbar px-mobileX md:px-tabletX lg:px-desktopX 3xl:px-plusDesktopX flex flex-col items-center w-full'>
+            <div className='pt-navbar pb-6 md:pb-navbar px-mobileX md:px-tabletX lg:px-desktopX 3xl:px-plusDesktopX flex flex-col items-center w-full'>
                 <div className='flex flex-col text-center items-center gap-y-4 w-full md:w-[80%]'>
                     <H1 className='text-ganache'>{collection.title}</H1>
                     <RichText

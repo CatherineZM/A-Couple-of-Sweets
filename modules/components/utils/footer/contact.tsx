@@ -22,7 +22,7 @@ export default function FooterContact(): JSX.Element {
                         Full Name
                     </label>
                     <input
-                        className='border-2 rounded w-full py-5 px-3 border-ganache text-ganache bg-transparent placeholder-ganache/70 leading-tight focus:outline-none focus:shadow-outline font-normal text-base'
+                        className='border-2 rounded w-full py-2 md:py-5 px-3 border-ganache text-ganache bg-transparent placeholder-ganache/70 leading-tight focus:outline-none focus:shadow-outline font-normal text-base'
                         id='name'
                         type='name'
                         name='name'
@@ -37,7 +37,7 @@ export default function FooterContact(): JSX.Element {
                         Email
                     </label>
                     <input
-                        className='border-2 rounded w-full py-5 px-3 border-ganache text-ganache bg-transparent placeholder-ganache/70 leading-tight focus:outline-none focus:shadow-outline font-normal text-base'
+                        className='border-2 rounded w-full py-2 md:py-5 px-3 border-ganache text-ganache bg-transparent placeholder-ganache/70 leading-tight focus:outline-none focus:shadow-outline font-normal text-base'
                         id='email'
                         type='email'
                         name='email'
@@ -52,14 +52,14 @@ export default function FooterContact(): JSX.Element {
                         Your Message
                     </label>
                     <textarea
-                        className='border-2 rounded w-full py-5 px-3 border-ganache text-ganache bg-transparent placeholder-ganache/70 leading-tight focus:outline-none focus:shadow-outline font-normal text-base'
+                        className='border-2 rounded w-full py-2 md:py-5 px-3 border-ganache text-ganache bg-transparent placeholder-ganache/70 leading-tight focus:outline-none focus:shadow-outline font-normal text-base min-h-28'
                         id='message'
                         name='message'
                         required
                         placeholder='Write your message here...'
                     />
                 </div>
-            <Button type='submit' disabled={state.submitting} theme='dark' className="w-fit py-4 px-8">
+            <Button type='submit' disabled={state.submitting} theme='dark' className="w-fit py-2 md:py-4 px-8">
                 Send Message
             </Button>
         </form>

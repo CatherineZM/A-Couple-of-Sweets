@@ -28,7 +28,7 @@ export default function FooterIntro({
             <div>
                 <RichTextRender
                     content={content.raw}
-                    className='text-ganache'
+                    classNameP='text-ganache'
                 />
             </div>
             <div className='flex flex-col gap-y-2.5 md:gap-y-4'>

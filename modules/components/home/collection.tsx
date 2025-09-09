@@ -53,7 +53,7 @@ export default function CollectionRow (props: Props): JSX.Element {
                 <H2 className={`${props.theme.titleColor} `}>{props.name}</H2>
                 <RichTextRender
                     content={props.description.raw}
-                    className={`${props.theme.titleColor}`}
+                    classNameH4={`${props.theme.titleColor}`}
                 />
                 <Button
                     theme={props.theme.btnTheme}

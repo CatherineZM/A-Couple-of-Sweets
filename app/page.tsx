@@ -86,7 +86,7 @@ export default async function Home(): Promise<JSX.Element> {
                     <H1 className="font-dmsans text-center">{home.welcome}</H1>
                     <RichTextRender
                         content={home.slogan.raw}
-                        className="font-dmsans text-center"
+                        classNameH2="font-dmsans text-center"
                     />
                 </div>
                 <div className="max-w-screen-2xl w-full border-y border-t-ganache border-b-ganache text-ganache py-5 px-2">

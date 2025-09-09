@@ -40,7 +40,8 @@ html.lenis body {
 }
 
 .popupSwiper .swiper-pagination-bullet{
-    background-color: #BAB86C;
+    background-color: #F9F7EF;
+    opacity: 0.8;
 }
 
 .popupSwiper .swiper-pagination-bullet-active{
