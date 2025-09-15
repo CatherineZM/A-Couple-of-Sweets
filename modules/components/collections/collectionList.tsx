@@ -92,7 +92,6 @@ export default function SeasonalTabs({ seasonal, featured }: Props) {
     const setSubTab = useCallback(
         (id: string) => {
             const params = new URLSearchParams(searchParams.toString());
-            params.set("utm", active); // ensure current primary tab persists
             params.set("col", id);
             startTransition(() => {
                 router.replace(`${pathname}?${params.toString()}`, { scroll: false });

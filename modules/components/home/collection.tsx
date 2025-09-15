@@ -1,6 +1,8 @@
 "use client";
 // import React components
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
 // types
 import { Product } from "@/modules/gql/graphql";
 // Import Swiper React components
@@ -24,11 +26,13 @@ interface Props {
     };
     productList: Array<Product>;
     theme: any;
+    url: string;
 }
 
 export default function CollectionRow (props: Props): JSX.Element {
     const [mounted, setMounted] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         setMounted(true);
@@ -57,6 +61,7 @@ export default function CollectionRow (props: Props): JSX.Element {
                     classNameP={`${props.theme.titleColor}`}
                 />
                 <Button
+                    action={() => router.push(props.url)}
                     theme={props.theme.btnTheme}
                     fill={props.theme.btnFill}
                     className="hidden md:block w-full py-4">
@@ -117,6 +122,7 @@ export default function CollectionRow (props: Props): JSX.Element {
                 </Swiper>
             </div>
             <Button
+                action={() => router.push(props.url)}
                 theme={props.theme.btnThemeMobile}
                 fill={props.theme.btnFill}
                 className="block md:hidden w-full py-2">

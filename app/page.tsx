@@ -60,6 +60,17 @@ export default async function Home(): Promise<JSX.Element> {
         },
     ];
 
+    const tabs = [
+        { id: "current", label: "Seasonal" },
+        { id: "all-time", label: "All-time Fav" },
+        { id: "past", label: "Past Seasonal" },
+    ];
+
+    const getTabUrl = (label: string) => {
+        const id = tabs.find((t) => t.label === label)?.id;
+        return id ? `/collections?utm=${id}` : "/collections";
+    };
+
     return (
         <div className="bg-cream">
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-x-clip">
@@ -97,6 +108,7 @@ export default async function Home(): Promise<JSX.Element> {
                     description={seasonal[0].collectionDescription}
                     productList={seasonal[0].productList}
                     theme={theme.green}
+                    url={getTabUrl("Seasonal")}
                 />
                 <div className="w-[99vw] relative left-1/2 right-1/2 -mx-[50vw] overflow-x-clip">
                     <hr className="border-t border-ganache/70 my-3" />
@@ -126,6 +138,7 @@ export default async function Home(): Promise<JSX.Element> {
                     description={featured[0].collectionDescription}
                     productList={featured[0].productList}
                     theme={theme.brown}
+                    url={getTabUrl("All-time Fav")}
                 />
             </div>
         </div>
