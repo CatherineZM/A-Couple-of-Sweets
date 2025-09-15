@@ -19,14 +19,14 @@ export default function MobileNav(props: Props): JSX.Element {
     return (
         <div
             className={`fixed md:hidden left-0 bottom-0 w-full z-50 bg-buttercream border-t border-bday-neutral transition-transform duration-500 px-mobileX sm:px-tabletX flex flex-col py-3 gap-y-3 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]`}>
-            <div className="flex flex-row divide-x-2 divide-olive w-full justify-evenly">
+            <div className="flex flex-row w-full divide-x-2 divide-ganache justify-evenly">
                 {menu.map((item) => (
                     <Link
                         key={item.id}
                         href={item.href}
                         target={item.newWindow ? "_blank" : "_self"}
                         rel={item.newWindow ? "noopener noreferrer" : undefined}
-                        className={`px-2 capitalize font-dmsans font-semibold text-xl lg:text-[32px] duration-300 transition-all ease-in-out ${
+                        className={`px-1 text-center w-full capitalize font-dmsans font-semibold text-base md:text-lg lg:text-[32px] duration-300 transition-all ease-in-out ${
                             currentPath === item.href
                                 ? "text-olive underline"
                                 : "text-ganache hover:text-ganache/80 no-underline "

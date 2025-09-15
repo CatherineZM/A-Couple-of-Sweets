@@ -44,8 +44,8 @@ export default async function Home(): Promise<JSX.Element> {
     const icons = [
         {
             icon: "/icons/berries.png",
-            className: "bottom-[25%] -left-[3%] md:top-[10%] md:left-[5%]",
-            svgClassName: "w-[20vw] md:w-[12vw] md:max-w-[60%] xl:max-w-[70%]",
+            className: "top-[15%] -right-[5%] md:top-[10%] md:left-[5%]",
+            svgClassName: "w-[15vw] md:w-[12vw] md:max-w-[60%] xl:max-w-[70%]",
             xRange: 10,
             yRange: -20,
             duration: 3,
@@ -62,7 +62,7 @@ export default async function Home(): Promise<JSX.Element> {
 
     return (
         <div className="bg-cream">
-            <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+            <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-x-clip">
                 {icons.map((item, index) => (
                     <FloatingImage
                         key={index}
