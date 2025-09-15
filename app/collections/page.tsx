@@ -10,6 +10,7 @@ import { H1, H4, Paragraph } from "@/modules/components/utils";
 // external component
 import { LuWheatOff, LuMilkOff, LuNutOff } from "react-icons/lu";
 import { RichText } from "@graphcms/rich-text-react-renderer";
+import { Suspense } from "react";
 
 export default async function Collections(): Promise<JSX.Element> {
     const SeasonalData = getSeasonalData();
@@ -54,7 +55,9 @@ export default async function Collections(): Promise<JSX.Element> {
                         ))}
                     </div>
                 </div>
-                <CollectionList seasonal={seasonal} featured={featured} />
+                <Suspense fallback={<div className='mt-8 text-ganache'>Loading collections…</div>}>
+                    <CollectionList seasonal={seasonal} featured={featured} />
+                </Suspense>
             </div>
         </div>
     );

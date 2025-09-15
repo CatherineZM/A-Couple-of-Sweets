@@ -23,7 +23,7 @@ interface Props {
 export default function HomeAnnouncement (props: Props): JSX.Element {
     return (
         <Swiper
-            className="flex w-full min-h-[80px] select-none items-center justify-center"
+            className="announceSwiper flex w-full min-h-[80px] select-none items-center justify-center"
             spaceBetween={50}
             slidesPerView={1}
             speed={800}
@@ -38,8 +38,13 @@ export default function HomeAnnouncement (props: Props): JSX.Element {
             loop={props.announcement.length > 1}
             modules={[Navigation, Autoplay]}>
             {props.announcement.map((item: any, index: number) => (
-                <SwiperSlide key={index} className="grid place-items-center justify-items-center min-h-[80px] w-full h-full">
-                    <RichTextRender content={item.raw} classNameP="font-dmsans text-center w-[80%] h-full" />
+                <SwiperSlide key={index} className="w-full h-full">
+                    <div className="h-full flex items-center justify-center">
+                        <RichTextRender
+                            content={item.raw}
+                            classNameP="font-dmsans text-center w-[80%] h-full"
+                        />
+                    </div>
                 </SwiperSlide>
             ))}
             <div

@@ -89,7 +89,7 @@ export default async function Home(): Promise<JSX.Element> {
                         classNameH2="font-dmsans text-center"
                     />
                 </div>
-                <div className="max-w-screen-2xl w-full border-y border-t-ganache border-b-ganache text-ganache py-5 px-2">
+                <div className="max-w-screen-2xl w-full border-y border-t-ganache border-b-ganache text-ganache py-0 md:py-5 px-2">
                     <HomeAnnouncement announcement={home.announcement} />
                 </div>
                 <CollectionRow

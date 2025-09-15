@@ -27,8 +27,23 @@ html.lenis body {
     pointer-events: none;
 }
 
+.announceSwiper {
+  width: 100%;
+  height: 100%;
+}
+
+.announceSwiper .swiper-wrapper{
+    align-items: center;
+}
+
+.announceSwiper .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .productSwiper * {
-   user-select: none;
+    user-select: none;
 }
 
 .popupSwiper .swiper-wrapper{

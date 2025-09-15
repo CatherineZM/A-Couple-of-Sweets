@@ -1,4 +1,3 @@
-// components/SeasonalTabs.tsx
 "use client";
 
 // type

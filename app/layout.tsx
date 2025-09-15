@@ -12,6 +12,7 @@ import "./globals.css";
 import { Marcellus, DM_Sans } from "next/font/google";
 import Menu from "@/modules/components/utils/navigation/menu";
 import Footer from "@/modules/components/utils/footer/footer";
+import MobileNav from "@/modules/components/utils/navigation/mobile";
 
 const marcellus = Marcellus({
     weight: ["400"],
@@ -24,6 +25,33 @@ const dmSans = DM_Sans({
     variable: "--font-dm_sans",
     subsets: ["latin"],
 });
+
+const menu = [
+    {
+        id: "nav-home",
+        href: "/",
+        name: "Home",
+        newWindow: false,
+    },
+    {
+        id: "nav-collections",
+        href: "/collections",
+        name: "Collections",
+        newWindow: false,
+    },
+    {
+        id: "nav-about",
+        href: "/about",
+        name: "About",
+        newWindow: false,
+    },
+    {
+        id: "nav-order",
+        href: "https://www.instagram.com/a_couple_ofsweets?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+        name: "Order",
+        newWindow: true,
+    },
+];
 
 export const metadata: Metadata = {
     title: "A Couple Of Sweets",
@@ -41,12 +69,10 @@ export default function RootLayout({
             <body
                 suppressHydrationWarning
                 className={`${marcellus.variable} ${dmSans.variable}`}>
-                    <Menu />
-                    <SmoothScrolling>{children}</SmoothScrolling>
-                    <Footer />
-                    <div className='flex justify-center w-full border-t border-ganache bg-cream py-2'>
-                    © 2025 A Couple Of Sweets. All rights reserved.
-                </div>
+                <Menu menu={menu} />
+                <MobileNav menu={menu} />
+                <SmoothScrolling>{children}</SmoothScrolling>
+                <Footer />
             </body>
         </html>
     );

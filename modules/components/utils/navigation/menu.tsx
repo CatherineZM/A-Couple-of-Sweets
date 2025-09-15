@@ -1,92 +1,23 @@
 "use client";
 
 // external library
-import React, { useState, useCallback, useEffect } from "react";
+import React from "react";
 import { usePathname } from "next/navigation";
-import { motion, useAnimation } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
-const menu = [
-    {
-        id: "nav-home",
-        href: "/",
-        name: "Home",
-        newWindow: false,
-    },
-    {
-        id: "nav-collections",
-        href: "/collections",
-        name: "Collections",
-        newWindow: false,
-    },
-    {
-        id: "nav-about",
-        href: "/about",
-        name: "About Us",
-        newWindow: false,
-    },
-    {
-        id: "nav-order",
-        href: "https://www.instagram.com/a_couple_ofsweets?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
-        name: "Order Now",
-        newWindow: true,
-    },
-];
+interface Props{
+    menu: Array<{
+        id: string;
+        href: string;
+        name: string;
+        newWindow: boolean;
+    }>
+}
 
-export default function Menu(): JSX.Element {
-    const controls = useAnimation();
+export default function Menu(props: Props): JSX.Element {
+    const { menu } = props;
     const currentPath = usePathname();
-    const [scrolled, setScrolled] = useState(false);
-
-    const useMediaQuery = (width: number): boolean => {
-        const [targetReached, setTargetReached] = useState(false);
-
-        const updateTarget = useCallback((e: MediaQueryListEvent) => {
-            if (e.matches) {
-                setTargetReached(true);
-            } else {
-                setTargetReached(false);
-            }
-        }, []);
-
-        useEffect(() => {
-            const media = window.matchMedia(`(max-width: ${width}px)`);
-            media.addEventListener("change", updateTarget);
-
-            if (media.matches) {
-                setTargetReached(true);
-            }
-
-            return () => media.removeEventListener("change", updateTarget);
-        }, [width, updateTarget]);
-
-        return targetReached;
-    };
-
-    useEffect(() => {
-        const handleScroll = (): void => {
-            const scrolledPos = window.scrollY;
-            const moved = scrolledPos > 0;
-            setScrolled(moved);
-        };
-        window.addEventListener("scroll", handleScroll, { passive: true });
-
-        return (): void => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
-
-    const isBreakpoint = useMediaQuery(1060);
-
-    const menuVariants = {
-        hidden: {
-            opacity: 0,
-        },
-        visible: {
-            opacity: 1,
-        },
-    };
 
     const leftItems = menu.slice(0, 2);
     const rightItems = menu.slice(2, 4);
