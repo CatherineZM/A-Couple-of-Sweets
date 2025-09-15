@@ -14,10 +14,19 @@ export default function ProductCard (props: Props): JSX.Element {
 
     return (
         <div className="flex flex-col h-full w-full gap-y-2.5">
-            {product.productPhoto[0] && (
+            {product.productPhoto[0] ? (
                 <CldImage
-                    src={product.productPhoto[0].url}
+                    src={`${product.productPhoto[0].url}`}
                     alt={product.name}
+                    width={800}
+                    height={800}
+                    sizes="25vw, (min-width: 1024px) 50vw"
+                    className="aspect-square w-full object-cover rounded-lg"
+                />
+            ) : (
+                <CldImage
+                    src="https://res.cloudinary.com/dpm4xrj5f/image/upload/v1757389150/temp_afibsn.png"
+                    alt="A Couple of Sweets"
                     width={800}
                     height={800}
                     sizes="25vw, (min-width: 1024px) 50vw"
