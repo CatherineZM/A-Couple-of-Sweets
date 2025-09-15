@@ -25,7 +25,7 @@ export default async function Home(): Promise<JSX.Element> {
     const theme = {
         green: {
             bgColor: "bg-transparent md:bg-olive",
-            titleColor: "test-ganache md:text-buttercream",
+            titleColor: "text-ganache md:text-buttercream",
             btnTheme: "light",
             btnThemeMobile: "dark",
             btnFill: true,

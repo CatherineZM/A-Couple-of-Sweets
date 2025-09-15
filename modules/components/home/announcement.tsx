@@ -23,7 +23,7 @@ interface Props {
 export default function HomeAnnouncement (props: Props): JSX.Element {
     return (
         <Swiper
-            className="announceSwiper flex w-full min-h-[80px] select-none items-center justify-center"
+            className="announceSwiper flex w-full min-h-[80px] md:min-h-8 select-none items-center justify-center"
             spaceBetween={50}
             slidesPerView={1}
             speed={800}
