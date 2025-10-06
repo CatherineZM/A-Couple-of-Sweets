@@ -1,7 +1,6 @@
 "use client";
 
 // type
-import { Product } from "@/modules/gql/graphql";
 
 // external component
 import { useMemo, useCallback, useTransition } from "react";
@@ -10,9 +9,9 @@ import { motion } from "framer-motion";
 
 // internal component
 import { Button, H4, Paragraph } from "@/modules/components/utils";
-import CollectionDisplay from "@/modules/components/collections/collectionDisplay";
-
-const toSlug = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
+import MarketsDisplay from "./market";
+import Achievement from "./achievement";
+import AboutDisplay from "./aboutUs";
 
 interface Props {
     markets: {
@@ -72,7 +71,6 @@ export default function AboutList({ markets, achievements, about }: Props) {
     ];
 
     // primary tab ("utm") stays as-is below
-
     const currentParam = searchParams.get("utm") ?? tabs[0].id;
     const active = tabs.some((t) => t.id === currentParam)
         ? currentParam
@@ -82,7 +80,6 @@ export default function AboutList({ markets, achievements, about }: Props) {
         (id: string) => {
             const params = new URLSearchParams(searchParams.toString());
             params.set("utm", id);
-            params.delete("col"); // reset secondary tab on primary change
             startTransition(() => {
                 router.replace(`${pathname}?${params.toString()}`, {
                     scroll: false,

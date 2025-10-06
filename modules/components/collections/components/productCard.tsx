@@ -6,7 +6,6 @@ import { Product, DietaryRestriction } from "@/modules/gql/graphql";
 
 // internal components
 import {
-    H4,
     Paragraph,
     RichTextRender,
     CldImage,

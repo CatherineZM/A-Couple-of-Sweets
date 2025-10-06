@@ -1,7 +1,13 @@
+// type
 import { Product } from "@/modules/gql/graphql";
+
+// internal component
 import { H2, Paragraph } from "@/modules/components/utils";
+import ProductCard from "@/modules/components/collections/components/productCard";
+
+// external component
 import { RichText } from "@graphcms/rich-text-react-renderer";
-import ProductCard from "./productCard";
+
 interface Props {
     title: string;
     description?: {

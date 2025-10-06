@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 
 // internal component
 import { Button, H4, Paragraph } from "@/modules/components/utils";
-import CollectionDisplay from "@/modules/components/collections/collectionDisplay";
+import CollectionDisplay from "@/modules/components/collections/components/collectionDisplay";
 
 const toSlug = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
 

@@ -1,8 +1,13 @@
-import React, { useEffect, useRef } from "react";
 
+// React
+import React, { useEffect } from "react";
+
+// internal component
+import { H4 } from "@/modules/components/utils";
+
+// external component
 import { IoMdClose } from "react-icons/io";
 import { motion } from "framer-motion";
-import { H4 } from "../utils";
 
 interface popupProps {
     isOpen: boolean;
