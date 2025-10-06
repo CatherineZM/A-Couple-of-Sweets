@@ -3,12 +3,12 @@
 // type
 
 // external component
-import { useMemo, useCallback, useTransition } from "react";
+import { useCallback, useTransition } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 
 // internal component
-import { Button, H4, Paragraph } from "@/modules/components/utils";
+import { Paragraph, H3 } from "@/modules/components/utils";
 import MarketsDisplay from "./market";
 import Achievement from "./achievement";
 import AboutDisplay from "./aboutUs";
@@ -91,11 +91,12 @@ export default function AboutList({ markets, achievements, about }: Props) {
 
     let content: React.ReactNode = null;
     if (active === "markets") {
-        <MarketsDisplay markets={markets} />
+        console.log('in market')
+        content = <MarketsDisplay markets={markets} />
     } else if (active === "achievements") {
-        <Achievement achievements={achievements} />
+        content = <Achievement achievements={achievements} />
     } else {
-        <AboutDisplay about={about} />
+        content = <AboutDisplay about={about} />
     }
 
     return (
@@ -120,10 +121,9 @@ export default function AboutList({ markets, achievements, about }: Props) {
                                     ? "border-olive text-olive"
                                     : "border-transparent text-ganache hover:text-olive",
                             ].join(" ")}>
-                            <h3
-                                className="font-dmsans font-semibold text-lg md:text-[32px]">
+                            <H3>
                                 {t.label}
-                            </h3>
+                            </H3>
                         </button>
                     );
                 })}
@@ -132,13 +132,13 @@ export default function AboutList({ markets, achievements, about }: Props) {
             {/* Panel */}
             <motion.div
                 key={`${active}-first`}
-                id={`panel-${active}-first}`}
+                id={`panel-${active}`}
                 role='tabpanel'
                 aria-labelledby={`tab-${active}`}
                 initial='hidden'
                 animate='visible'
                 variants={fadeInVariant}
-                className='pt-6'
+                className='pt-6 w-full flex flex-col items-center'
             >
                 {content}
                 <div className='mt-8 text-ganache'>
