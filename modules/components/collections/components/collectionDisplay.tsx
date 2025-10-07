@@ -9,6 +9,7 @@ import ProductCard from "@/modules/components/collections/components/productCard
 import { RichText } from "@graphcms/rich-text-react-renderer";
 
 interface Props {
+    live: boolean,
     title: string;
     description?: {
         raw: any;
@@ -17,7 +18,7 @@ interface Props {
 }
 
 export default function CollectionDisplay(props: Props): JSX.Element {
-    const { title, description, products } = props;
+    const { live, title, description, products } = props;
     const productLessThan4 = products.length < 4;
     return (
         <div className="flex flex-col items-center gap-y-6">
@@ -47,6 +48,7 @@ export default function CollectionDisplay(props: Props): JSX.Element {
                 {products.map((product, index) => (
                     <ProductCard
                         product={product}
+                        live={live}
                         key={index}
                         collection={title}
                     />

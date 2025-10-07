@@ -25,6 +25,7 @@ import "swiper/css/effect-creative";
 import "swiper/css/pagination";
 
 interface Props {
+    live: boolean;
     product: Product;
     collection: string;
 }
@@ -43,7 +44,7 @@ const isRichTextEmpty = (raw?: any): boolean => {
 };
 
 export default function ProductCard(props: Props): JSX.Element {
-    const { product, collection } = props;
+    const { live, product, collection } = props;
     const [open, setOpen] = useState(false);
     const [activeFlavour, setActiveFlavour] = useState("");
     const [swiperInst, setSwiperInst] = useState<any>(null);
@@ -82,15 +83,15 @@ export default function ProductCard(props: Props): JSX.Element {
     }, [open, swiperInst]);
 
     return (
-        <div className='flex flex-col h-full w-full gap-y-2.5 max-w-60 justify-between'>
+        <div className="flex flex-col h-full w-full gap-y-2.5 max-w-60 justify-between">
             {product.productPhoto[0] ? (
                 <CldImage
                     src={`${product.productPhoto[0].url}`}
                     alt={product.name}
                     width={800}
                     height={800}
-                    sizes='25vw, (min-width: 1024px) 50vw'
-                    className='aspect-square w-full object-cover rounded-lg'
+                    sizes="25vw, (min-width: 1024px) 50vw"
+                    className="aspect-square w-full object-cover rounded-lg"
                 />
             ) : (
                 <CldImage
@@ -98,68 +99,73 @@ export default function ProductCard(props: Props): JSX.Element {
                     alt="A Couple of Sweets"
                     width={800}
                     height={800}
-                    sizes='25vw, (min-width: 1024px) 50vw'
-                    className='aspect-square w-full object-cover rounded-lg'
+                    sizes="25vw, (min-width: 1024px) 50vw"
+                    className="aspect-square w-full object-cover rounded-lg"
                 />
             )}
-            <div className='flex flex-col h-full justify-between gap-y-2'>
-                <div className='h-full flex flex-col gap-y-2'>
-                    <Paragraph strong className='text-pretty'>
+            <div className="flex flex-col h-full justify-between gap-y-2">
+                <div className="h-full flex flex-col gap-y-2">
+                    <Paragraph strong className="text-pretty">
                         {product.name}
                     </Paragraph>
 
-                    <div className='flex flex-row justify-between'>
+                    <div className="flex flex-row justify-between">
                         {product.price && (
-                            <div className='gap-y-0'>
+                            <div className="gap-y-0">
                                 <RichTextRender content={product.price?.raw} />
                             </div>
                         )}
-                        <div className='flex flex-row gap-x-1'>
+                        <div className="flex flex-row gap-x-1">
                             {product.dietary.includes(
                                 DietaryRestriction.GlutenFree
                             ) && (
-                                <div className='flex items-center justify-center border-2 rounded-full border-olive h-7 w-7'>
-                                    <LuWheatOff className='text-olive h-5 w-5' />
+                                <div className="flex items-center justify-center border-2 rounded-full border-olive h-7 w-7">
+                                    <LuWheatOff className="text-olive h-5 w-5" />
                                 </div>
                             )}
                             {product.dietary.includes(
                                 DietaryRestriction.DairyFree
                             ) && (
-                                <div className='flex items-center justify-center border-2 rounded-full border-olive h-7 w-7'>
-                                    <LuMilkOff className='text-olive h-5 w-5' />
+                                <div className="flex items-center justify-center border-2 rounded-full border-olive h-7 w-7">
+                                    <LuMilkOff className="text-olive h-5 w-5" />
                                 </div>
                             )}
                             {product.dietary.includes(
                                 DietaryRestriction.NutFree
                             ) && (
-                                <div className='flex items-center justify-center border-2 rounded-full border-olive h-7 w-7'>
-                                    <LuNutOff className='text-olive h-5 w-5' />
+                                <div className="flex items-center justify-center border-2 rounded-full border-olive h-7 w-7">
+                                    <LuNutOff className="text-olive h-5 w-5" />
                                 </div>
                             )}
                         </div>
                     </div>
 
-                    <RichTextRender content={product.shortDescription.raw} classNameP="text-sm md:text-base text-clip" />
+                    <RichTextRender
+                        content={product.shortDescription.raw}
+                        classNameP="text-sm md:text-base text-clip"
+                    />
                 </div>
 
-                <div className='relative flex flex-col justify-center gap-y-1.5'>
-                    <Button
-                        action={() =>
-                            window.open(
-                                "https://www.instagram.com/a_couple_ofsweets?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
-                                "_blank"
-                            )
-                        }
-                        fill
-                        theme='dark'
-                        className='py-1 md:py-4'>
-                        Order Now
-                    </Button>
+                <div className="relative flex flex-col justify-center gap-y-1.5">
+                    {live && (
+                        <Button
+                            action={() =>
+                                window.open(
+                                    "https://www.instagram.com/a_couple_ofsweets?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+                                    "_blank"
+                                )
+                            }
+                            fill
+                            theme="dark"
+                            className="py-1 md:py-4">
+                            Order Now
+                        </Button>
+                    )}
                     <Button
                         action={() => setOpen(true)}
-                        type='button'
-                        theme='dark'
-                        className='py-1 md:py-4'>
+                        type="button"
+                        theme="dark"
+                        className="py-1 md:py-4">
                         Read More
                     </Button>
                     <PopupModal
@@ -167,9 +173,9 @@ export default function ProductCard(props: Props): JSX.Element {
                         onClose={handlePopupClose}
                         title={collection}>
                         {/* Scroll container to prevent modal overflow and keep header visible */}
-                        <div className='max-h-[75vh] overflow-y-auto pr-2'>
-                            <div className='grid grid-cols-1 md:grid-cols-2 gap-x-4 w-full h-full min-h-0'>
-                                <div className='basis-1/2 h-full w-full flex items-center min-h-0'>
+                        <div className="max-h-[75vh] overflow-y-auto pr-2">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 w-full h-full min-h-0">
+                                <div className="basis-1/2 h-full w-full flex items-center min-h-0">
                                     {open && (
                                         <Swiper
                                             key={
@@ -192,7 +198,7 @@ export default function ProductCard(props: Props): JSX.Element {
                                                 Pagination,
                                                 EffectCreative,
                                             ]}
-                                            effect='creative'
+                                            effect="creative"
                                             creativeEffect={{
                                                 prev: {
                                                     shadow: true,
@@ -211,18 +217,18 @@ export default function ProductCard(props: Props): JSX.Element {
                                                     ],
                                                 },
                                             }}
-                                            className='popupSwiper w-fit h-64 md:h-[50vh]'>
+                                            className="popupSwiper w-fit h-64 md:h-[50vh]">
                                             {product.productPhoto.length > 0 ? (
                                                 product.productPhoto.map(
                                                     (item, index) => (
                                                         <SwiperSlide
                                                             key={index}
-                                                            className='flex items-center justify-center w-full h-full'>
+                                                            className="flex items-center justify-center w-full h-full">
                                                             <CldImage
                                                                 height={400}
                                                                 width={300}
-                                                                crop='fill'
-                                                                gravity='center'
+                                                                crop="fill"
+                                                                gravity="center"
                                                                 style={{
                                                                     objectPosition:
                                                                         "center",
@@ -230,51 +236,51 @@ export default function ProductCard(props: Props): JSX.Element {
                                                                 src={
                                                                     item.public_id
                                                                 }
-                                                                sizes='(min-width: 768px) 48vw, (min-width: 1280px) 78vw'
+                                                                sizes="(min-width: 768px) 48vw, (min-width: 1280px) 78vw"
                                                                 alt={
                                                                     item.display_name
                                                                 }
-                                                                className='max-h-full max-w-full md:w-full md:h-auto object-contain'
+                                                                className="max-h-full max-w-full md:w-full md:h-auto object-contain"
                                                             />
                                                         </SwiperSlide>
                                                     )
                                                 )
                                             ) : (
                                                 <SwiperSlide
-                                                    key='placeholder'
-                                                    className='flex items-center justify-center w-full h-full'>
+                                                    key="placeholder"
+                                                    className="flex items-center justify-center w-full h-full">
                                                     <CldImage
                                                         height={400}
                                                         width={300}
-                                                        crop='fill'
-                                                        gravity='center'
+                                                        crop="fill"
+                                                        gravity="center"
                                                         style={{
                                                             objectPosition:
                                                                 "center",
                                                         }}
-                                                        src='https://res.cloudinary.com/dpm4xrj5f/image/upload/v1757389150/temp_afibsn.png'
-                                                        sizes='(min-width: 768px) 48vw, (min-width: 1280px) 78vw'
-                                                        alt='A Couple of Sweets'
-                                                        className='max-h-full max-w-full md:w-full md:h-auto object-contain'
+                                                        src="https://res.cloudinary.com/dpm4xrj5f/image/upload/v1757389150/temp_afibsn.png"
+                                                        sizes="(min-width: 768px) 48vw, (min-width: 1280px) 78vw"
+                                                        alt="A Couple of Sweets"
+                                                        className="max-h-full max-w-full md:w-full md:h-auto object-contain"
                                                     />
                                                 </SwiperSlide>
                                             )}
                                         </Swiper>
                                     )}
                                 </div>
-                                <div className='basis-1/2 h-full text-ganache flex flex-col gap-y-2 md:gap-y-6 min-h-0'>
-                                    <Paragraph strong className='text-ganache'>
+                                <div className="basis-1/2 h-full text-ganache flex flex-col gap-y-2 md:gap-y-6 min-h-0">
+                                    <Paragraph strong className="text-ganache">
                                         {product.name}
                                     </Paragraph>
-                                    <div className='flex flex-col gap-y-1.5'>
+                                    <div className="flex flex-col gap-y-1.5">
                                         {product.flavour.length > 0 && (
-                                            <div className='flex flex-col gap-y-1.5'>
+                                            <div className="flex flex-col gap-y-1.5">
                                                 <Paragraph>Flavours:</Paragraph>
                                                 {/* Mobile: dropdown */}
-                                                <div className='relative md:hidden'>
+                                                <div className="relative md:hidden">
                                                     <label
                                                         htmlFor={`flavour-${product.name}`}
-                                                        className='sr-only'>
+                                                        className="sr-only">
                                                         Choose flavour
                                                     </label>
                                                     <select
@@ -290,7 +296,7 @@ export default function ProductCard(props: Props): JSX.Element {
                                                                 e.target.value
                                                             )
                                                         }
-                                                        className='w-full rounded-lg border-2 border-olive active:border-ganache bg-transparent text-ganache px-3 py-2 pr-10 capitalize appearance-none whitespace-normal break-words'>
+                                                        className="w-full rounded-lg border-2 border-olive active:border-ganache bg-transparent text-ganache px-3 py-2 pr-10 capitalize appearance-none whitespace-normal break-words">
                                                         {product.flavour.map(
                                                             (f, i) => (
                                                                 <option
@@ -298,7 +304,7 @@ export default function ProductCard(props: Props): JSX.Element {
                                                                     value={
                                                                         f.flavourName
                                                                     }
-                                                                    className='capitalize'>
+                                                                    className="capitalize">
                                                                     {
                                                                         f.flavourName
                                                                     }
@@ -306,17 +312,17 @@ export default function ProductCard(props: Props): JSX.Element {
                                                             )
                                                         )}
                                                     </select>
-                                                    <span className='pointer-events-none absolute inset-y-0 right-3 flex items-center'>
-                                                        <LuChevronDown className='h-5 w-5 text-ganache' />
+                                                    <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                                                        <LuChevronDown className="h-5 w-5 text-ganache" />
                                                     </span>
                                                 </div>
 
                                                 {/* Desktop: buttons */}
-                                                <div className='hidden md:flex flex-row gap-x-1 gap-y-1.5 flex-wrap'>
+                                                <div className="hidden md:flex flex-row gap-x-1 gap-y-1.5 flex-wrap">
                                                     {product.flavour.map(
                                                         (item, index) => (
                                                             <Button
-                                                                theme='dark'
+                                                                theme="dark"
                                                                 key={index}
                                                                 isActive={
                                                                     item.flavourName ===
@@ -327,7 +333,7 @@ export default function ProductCard(props: Props): JSX.Element {
                                                                         item.flavourName
                                                                     )
                                                                 }
-                                                                className='px-2 py-0.5 capitalize'>
+                                                                className="px-2 py-0.5 capitalize">
                                                                 {
                                                                     item.flavourName
                                                                 }
@@ -337,9 +343,9 @@ export default function ProductCard(props: Props): JSX.Element {
                                                 </div>
                                             </div>
                                         )}
-                                        <div className='flex flex-row justify-between items-center'>
+                                        <div className="flex flex-row justify-between items-center">
                                             {displayedPriceRaw && (
-                                                <div className='gap-y-0'>
+                                                <div className="gap-y-0">
                                                     <RichTextRender
                                                         content={
                                                             displayedPriceRaw
@@ -347,26 +353,26 @@ export default function ProductCard(props: Props): JSX.Element {
                                                     />
                                                 </div>
                                             )}
-                                            <div className='flex flex-row gap-x-1'>
+                                            <div className="flex flex-row gap-x-1">
                                                 {effectiveDietary.includes(
                                                     DietaryRestriction.GlutenFree
                                                 ) && (
-                                                    <div className='flex items-center justify-center border-2 rounded-full border-olive h-7 w-7'>
-                                                        <LuWheatOff className='text-olive h-5 w-5' />
+                                                    <div className="flex items-center justify-center border-2 rounded-full border-olive h-7 w-7">
+                                                        <LuWheatOff className="text-olive h-5 w-5" />
                                                     </div>
                                                 )}
                                                 {effectiveDietary.includes(
                                                     DietaryRestriction.DairyFree
                                                 ) && (
-                                                    <div className='flex items-center justify-center border-2 rounded-full border-olive h-7 w-7'>
-                                                        <LuMilkOff className='text-olive h-5 w-5' />
+                                                    <div className="flex items-center justify-center border-2 rounded-full border-olive h-7 w-7">
+                                                        <LuMilkOff className="text-olive h-5 w-5" />
                                                     </div>
                                                 )}
                                                 {effectiveDietary.includes(
                                                     DietaryRestriction.NutFree
                                                 ) && (
-                                                    <div className='flex items-center justify-center border-2 rounded-full border-olive h-7 w-7'>
-                                                        <LuNutOff className='text-olive h-5 w-5' />
+                                                    <div className="flex items-center justify-center border-2 rounded-full border-olive h-7 w-7">
+                                                        <LuNutOff className="text-olive h-5 w-5" />
                                                     </div>
                                                 )}
                                             </div>
@@ -392,17 +398,19 @@ export default function ProductCard(props: Props): JSX.Element {
                                                 : product.shortDescription.raw
                                         }
                                     />
-                                    <Button
-                                        action={() =>
-                                            window.open(
-                                                "https://www.instagram.com/a_couple_ofsweets?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
-                                                "_blank"
-                                            )
-                                        }
-                                        theme='dark'
-                                        className='py-2 px-4 w-fit'>
-                                        Order Now
-                                    </Button>
+                                    {live && (
+                                        <Button
+                                            action={() =>
+                                                window.open(
+                                                    "https://www.instagram.com/a_couple_ofsweets?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+                                                    "_blank"
+                                                )
+                                            }
+                                            theme="dark"
+                                            className="py-2 px-4 w-fit">
+                                            Order Now
+                                        </Button>
+                                    )}
                                 </div>
                             </div>
                         </div>

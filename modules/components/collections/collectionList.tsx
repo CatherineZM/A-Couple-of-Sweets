@@ -135,6 +135,7 @@ export default function SeasonalTabs({ seasonal, featured }: Props) {
     );
 
     const renderCollections = (
+        live: boolean,
         cols: Props["seasonal"] | Props["featured"],
         emptyText: string,
         selectedId?: string
@@ -155,6 +156,7 @@ export default function SeasonalTabs({ seasonal, featured }: Props) {
         return (
             <CollectionDisplay
                 key={selected.collectionName}
+                live={live}
                 title={selected.collectionName}
                 description={selected.collectionDescription}
                 products={selected.productList}
@@ -165,18 +167,21 @@ export default function SeasonalTabs({ seasonal, featured }: Props) {
     let content: React.ReactNode = null;
     if (active === "current") {
         content = renderCollections(
+            true,
             currentCollections,
             "Stay Tuned. New current seasonal collection is coming soon.",
             activeSub
         );
     } else if (active === "all-time") {
         content = renderCollections(
+            true,
             featured,
             "Stay Tuned. New featured collection is coming soon.",
             activeSub
         );
     } else {
         content = renderCollections(
+            false,
             pastCollections,
             "No past seasonal collections yet.",
             activeSub
