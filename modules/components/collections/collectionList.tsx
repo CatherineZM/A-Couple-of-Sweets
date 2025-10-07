@@ -36,8 +36,36 @@ export default function SeasonalTabs({ seasonal, featured }: Props) {
     const [isPending, startTransition] = useTransition();
 
     const { currentCollections, pastCollections } = useMemo(() => {
-        const current = seasonal.filter((c) => !c.pastCollection);
-        const past = seasonal.filter((c) => !!c.pastCollection);
+        // Prepare filtered arrays
+        const current: typeof seasonal = [];
+        const past: typeof seasonal = [];
+
+        seasonal.forEach((collection) => {
+            const { productList = [], pastCollection } = collection;
+
+            // Filter product lists
+            const currentProducts = productList.filter((p) => !p.pastProduct);
+            const pastProducts = productList.filter((p) => p.pastProduct);
+
+            // Include collection in "current" if it’s not a past collection and has any current products
+            if (!pastCollection && currentProducts.length > 0) {
+                current.push({
+                    ...collection,
+                    productList: currentProducts,
+                });
+            }
+
+            // Include collection in "past" if:
+            // - it's a past collection, OR
+            // - it has any past products
+            if (pastCollection || pastProducts.length > 0) {
+                past.push({
+                    ...collection,
+                    productList: pastProducts,
+                });
+            }
+        });
+
         return { currentCollections: current, pastCollections: past };
     }, [seasonal]);
 

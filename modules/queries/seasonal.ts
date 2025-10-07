@@ -10,6 +10,7 @@ export const SEASONAL_DATA = gql(`
                 raw
             }
             productList {
+                pastProduct
                 productPhoto
                 name
                 price {

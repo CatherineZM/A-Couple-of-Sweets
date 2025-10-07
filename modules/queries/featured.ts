@@ -8,6 +8,7 @@ export const FEATURED_DATA = gql(`
                 raw
             }
             productList {
+                pastProduct
                 productPhoto
                 name
                 price {
