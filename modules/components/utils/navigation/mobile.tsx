@@ -18,7 +18,7 @@ export default function MobileNav(props: Props): JSX.Element {
     const currentPath = usePathname();
     return (
         <div
-            className={`fixed md:hidden left-0 bottom-0 w-full z-50 bg-buttercream border-t border-bday-neutral transition-transform duration-500 px-mobileX sm:px-tabletX flex flex-col py-3 gap-y-3 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]`}>
+            className={`fixed md:hidden left-0 bottom-0 inset-x-0 w-full z-[9999] bg-buttercream border-t border-bday-neutral px-mobileX sm:px-tabletX flex flex-col py-3 gap-y-3 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] will-change-auto`}>
             <div className="flex flex-row w-full divide-x-2 divide-ganache justify-evenly">
                 {menu.map((item) => (
                     <Link

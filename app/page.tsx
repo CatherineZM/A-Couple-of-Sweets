@@ -60,6 +60,46 @@ export default async function Home(): Promise<JSX.Element> {
         },
     ];
 
+    const icons2 = [
+        {
+            icon: "/icons/lemon.png",
+            className: "top-[15%] -right-[5%] md:top-[10%] md:left-[5%]",
+            svgClassName: "w-[15vw] md:w-[12vw] md:max-w-[60%] xl:max-w-[70%]",
+            xRange: 10,
+            yRange: -20,
+            duration: 3,
+        },
+        {
+            icon: "/icons/olive_oil.png",
+            className: "top-[25%] left-[5%] md:top-[20%] md:left-[85%]",
+            svgClassName: "w-[20vw] md:w-[10vw] md:max-w-[60%] xl:max-w-[70%]",
+            xRange: 10,
+            yRange: 2,
+            duration: 3,
+        },
+    ];
+
+    const icons3 = [
+        {
+            icon: "/icons/honey.png",
+            className: "top-[15%] -right-[5%] md:top-[10%] md:left-[5%]",
+            svgClassName: "w-[15vw] md:w-[12vw] md:max-w-[60%] xl:max-w-[70%]",
+            xRange: 10,
+            yRange: -20,
+            duration: 3,
+        },
+        {
+            icon: "/icons/spatula.png",
+            className:
+                "top-[25%] -left-[5%] md:top-[20%] md:left-[105%]",
+            svgClassName:
+                "w-[20vw] md:w-[10vw] md:max-w-[60%] xl:max-w-[70%] rotate-45",
+            xRange: 10,
+            yRange: -10,
+            duration: 3,
+        },
+    ];
+
     const tabs = [
         { id: "current", label: "Seasonal" },
         { id: "all-time", label: "All-time Fav" },
@@ -133,6 +173,25 @@ export default async function Home(): Promise<JSX.Element> {
                     />
                     <hr className="border-t border-ganache/70 my-3" />
                 </div>
+                <div className="block md:hidden relative top-0 left-0 w-full h-full pointer-events-none overflow-x-visible -mx-mobileX md:-mx-tabletX lg:-mx-desktopX 3xl:-mx-plusDesktopX">
+                    {icons2.map((item, index) => (
+                        <FloatingImage
+                            key={index}
+                            xRange={item.xRange}
+                            yRange={item.yRange}
+                            duration={item.duration}
+                            className={item.className}>
+                            <div
+                                className={`${item.svgClassName} relative aspect-square`}>
+                                <img
+                                    src={item.icon}
+                                    alt=""
+                                    className="object-contain w-full h-full"
+                                />
+                            </div>
+                        </FloatingImage>
+                    ))}
+                </div>
                 <CollectionRow
                     name={featured[0].collectionName}
                     description={featured[0].collectionDescription}
@@ -140,6 +199,25 @@ export default async function Home(): Promise<JSX.Element> {
                     theme={theme.brown}
                     url={getTabUrl("All-time Fav")}
                 />
+                <div className="relative top-0 left-0 w-full h-full pointer-events-none overflow-x-visible -mx-mobileX md:-mx-tabletX lg:-mx-desktopX 3xl:-mx-plusDesktopX">
+                    {icons3.map((item, index) => (
+                        <FloatingImage
+                            key={index}
+                            xRange={item.xRange}
+                            yRange={item.yRange}
+                            duration={item.duration}
+                            className={item.className}>
+                            <div
+                                className={`${item.svgClassName} relative aspect-square`}>
+                                <img
+                                    src={item.icon}
+                                    alt=""
+                                    className="object-contain w-full h-full"
+                                />
+                            </div>
+                        </FloatingImage>
+                    ))}
+                </div>
             </div>
         </div>
     );

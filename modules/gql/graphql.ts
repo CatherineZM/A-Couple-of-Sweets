@@ -35,13 +35,19 @@ export type AboutItem = Entity & {
   description: RichText;
   /** The unique identifier */
   id: Scalars['ID']['output'];
-  image: Array<Scalars['Json']['output']>;
+  photo?: Maybe<Media>;
   /** System stage field */
   stage: Stage;
   /** Title for this section */
   title: Scalars['String']['output'];
   /** System updatedAt field */
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type AboutItemPhotoArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
 };
 
 export type AboutItemConnectInput = {
@@ -63,7 +69,7 @@ export type AboutItemConnection = {
 
 export type AboutItemCreateInput = {
   description: Scalars['RichTextAST']['input'];
-  image: Array<Scalars['Json']['input']>;
+  photo?: InputMaybe<MediaCreateOneInlineInput>;
   title: Scalars['String']['input'];
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
@@ -123,15 +129,7 @@ export type AboutItemManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']['input']>;
-  /** All values containing the given json path. */
-  image_json_path_exists?: InputMaybe<Scalars['String']['input']>;
-  /**
-   * Recursively tries to find the provided JSON scalar value inside the field.
-   * It does use an exact match when comparing values.
-   * If you pass `null` as value the filter will be ignored.
-   * Note: This filter fails if you try to look for a non scalar JSON value!
-   */
-  image_value_recursive?: InputMaybe<Scalars['Json']['input']>;
+  photo?: InputMaybe<MediaWhereInput>;
   title?: InputMaybe<Scalars['String']['input']>;
   /** All values containing the given string. */
   title_contains?: InputMaybe<Scalars['String']['input']>;
@@ -259,7 +257,7 @@ export type AboutItemParentWhereUniqueInput = {
 
 export type AboutItemUpdateInput = {
   description?: InputMaybe<Scalars['RichTextAST']['input']>;
-  image?: InputMaybe<Array<Scalars['Json']['input']>>;
+  photo?: InputMaybe<MediaUpdateOneInlineInput>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -276,7 +274,6 @@ export type AboutItemUpdateManyInlineInput = {
 
 export type AboutItemUpdateManyInput = {
   description?: InputMaybe<Scalars['RichTextAST']['input']>;
-  image?: InputMaybe<Array<Scalars['Json']['input']>>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -366,15 +363,7 @@ export type AboutItemWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']['input']>;
-  /** All values containing the given json path. */
-  image_json_path_exists?: InputMaybe<Scalars['String']['input']>;
-  /**
-   * Recursively tries to find the provided JSON scalar value inside the field.
-   * It does use an exact match when comparing values.
-   * If you pass `null` as value the filter will be ignored.
-   * Note: This filter fails if you try to look for a non scalar JSON value!
-   */
-  image_value_recursive?: InputMaybe<Scalars['Json']['input']>;
+  photo?: InputMaybe<MediaWhereInput>;
   title?: InputMaybe<Scalars['String']['input']>;
   /** All values containing the given string. */
   title_contains?: InputMaybe<Scalars['String']['input']>;
@@ -870,7 +859,7 @@ export type AboutUsWhereUniqueInput = {
 
 export type AchievementItem = Entity & {
   __typename?: 'AchievementItem';
-  date: Scalars['Date']['output'];
+  date: Scalars['String']['output'];
   /** Make sure to use different headings for contents. */
   description: RichText;
   /** The unique identifier */
@@ -902,7 +891,7 @@ export type AchievementItemConnection = {
 };
 
 export type AchievementItemCreateInput = {
-  date: Scalars['Date']['input'];
+  date: Scalars['String']['input'];
   description: Scalars['RichTextAST']['input'];
   image?: InputMaybe<Array<Scalars['Json']['input']>>;
   name: Scalars['String']['input'];
@@ -945,21 +934,25 @@ export type AchievementItemManyWhereInput = {
   OR?: InputMaybe<Array<AchievementItemWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']['input']>;
-  date?: InputMaybe<Scalars['Date']['input']>;
-  /** All values greater than the given value. */
-  date_gt?: InputMaybe<Scalars['Date']['input']>;
-  /** All values greater than or equal the given value. */
-  date_gte?: InputMaybe<Scalars['Date']['input']>;
+  date?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  date_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  date_ends_with?: InputMaybe<Scalars['String']['input']>;
   /** All values that are contained in given list. */
-  date_in?: InputMaybe<Array<InputMaybe<Scalars['Date']['input']>>>;
-  /** All values less than the given value. */
-  date_lt?: InputMaybe<Scalars['Date']['input']>;
-  /** All values less than or equal the given value. */
-  date_lte?: InputMaybe<Scalars['Date']['input']>;
+  date_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Any other value that exists and is not equal to the given value. */
-  date_not?: InputMaybe<Scalars['Date']['input']>;
+  date_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  date_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  date_not_ends_with?: InputMaybe<Scalars['String']['input']>;
   /** All values that are not contained in given list. */
-  date_not_in?: InputMaybe<Array<InputMaybe<Scalars['Date']['input']>>>;
+  date_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  date_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  date_starts_with?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']['input']>;
@@ -1116,7 +1109,7 @@ export type AchievementItemParentWhereUniqueInput = {
 };
 
 export type AchievementItemUpdateInput = {
-  date?: InputMaybe<Scalars['Date']['input']>;
+  date?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['RichTextAST']['input']>;
   image?: InputMaybe<Array<Scalars['Json']['input']>>;
   name?: InputMaybe<Scalars['String']['input']>;
@@ -1134,7 +1127,7 @@ export type AchievementItemUpdateManyInlineInput = {
 };
 
 export type AchievementItemUpdateManyInput = {
-  date?: InputMaybe<Scalars['Date']['input']>;
+  date?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['RichTextAST']['input']>;
   image?: InputMaybe<Array<Scalars['Json']['input']>>;
   name?: InputMaybe<Scalars['String']['input']>;
@@ -1207,21 +1200,25 @@ export type AchievementItemWhereInput = {
   OR?: InputMaybe<Array<AchievementItemWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']['input']>;
-  date?: InputMaybe<Scalars['Date']['input']>;
-  /** All values greater than the given value. */
-  date_gt?: InputMaybe<Scalars['Date']['input']>;
-  /** All values greater than or equal the given value. */
-  date_gte?: InputMaybe<Scalars['Date']['input']>;
+  date?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  date_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  date_ends_with?: InputMaybe<Scalars['String']['input']>;
   /** All values that are contained in given list. */
-  date_in?: InputMaybe<Array<InputMaybe<Scalars['Date']['input']>>>;
-  /** All values less than the given value. */
-  date_lt?: InputMaybe<Scalars['Date']['input']>;
-  /** All values less than or equal the given value. */
-  date_lte?: InputMaybe<Scalars['Date']['input']>;
+  date_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Any other value that exists and is not equal to the given value. */
-  date_not?: InputMaybe<Scalars['Date']['input']>;
+  date_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  date_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  date_not_ends_with?: InputMaybe<Scalars['String']['input']>;
   /** All values that are not contained in given list. */
-  date_not_in?: InputMaybe<Array<InputMaybe<Scalars['Date']['input']>>>;
+  date_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  date_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  date_starts_with?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']['input']>;
@@ -6060,13 +6057,15 @@ export enum MediaOrderByInput {
   UpdatedAtDesc = 'updatedAt_DESC'
 }
 
-export type MediaParent = MarketItem;
+export type MediaParent = AboutItem | MarketItem;
 
 export type MediaParentConnectInput = {
+  AboutItem?: InputMaybe<AboutItemConnectInput>;
   MarketItem?: InputMaybe<MarketItemConnectInput>;
 };
 
 export type MediaParentCreateInput = {
+  AboutItem?: InputMaybe<AboutItemCreateInput>;
   MarketItem?: InputMaybe<MarketItemCreateInput>;
 };
 
@@ -6081,10 +6080,12 @@ export type MediaParentCreateOneInlineInput = {
 };
 
 export type MediaParentCreateWithPositionInput = {
+  AboutItem?: InputMaybe<AboutItemCreateWithPositionInput>;
   MarketItem?: InputMaybe<MarketItemCreateWithPositionInput>;
 };
 
 export type MediaParentUpdateInput = {
+  AboutItem?: InputMaybe<AboutItemUpdateInput>;
   MarketItem?: InputMaybe<MarketItemUpdateInput>;
 };
 
@@ -6100,6 +6101,7 @@ export type MediaParentUpdateManyInlineInput = {
 };
 
 export type MediaParentUpdateManyWithNestedWhereInput = {
+  AboutItem?: InputMaybe<AboutItemUpdateManyWithNestedWhereInput>;
   MarketItem?: InputMaybe<MarketItemUpdateManyWithNestedWhereInput>;
 };
 
@@ -6115,26 +6117,32 @@ export type MediaParentUpdateOneInlineInput = {
 };
 
 export type MediaParentUpdateWithNestedWhereUniqueAndPositionInput = {
+  AboutItem?: InputMaybe<AboutItemUpdateWithNestedWhereUniqueAndPositionInput>;
   MarketItem?: InputMaybe<MarketItemUpdateWithNestedWhereUniqueAndPositionInput>;
 };
 
 export type MediaParentUpdateWithNestedWhereUniqueInput = {
+  AboutItem?: InputMaybe<AboutItemUpdateWithNestedWhereUniqueInput>;
   MarketItem?: InputMaybe<MarketItemUpdateWithNestedWhereUniqueInput>;
 };
 
 export type MediaParentUpsertWithNestedWhereUniqueAndPositionInput = {
+  AboutItem?: InputMaybe<AboutItemUpsertWithNestedWhereUniqueAndPositionInput>;
   MarketItem?: InputMaybe<MarketItemUpsertWithNestedWhereUniqueAndPositionInput>;
 };
 
 export type MediaParentUpsertWithNestedWhereUniqueInput = {
+  AboutItem?: InputMaybe<AboutItemUpsertWithNestedWhereUniqueInput>;
   MarketItem?: InputMaybe<MarketItemUpsertWithNestedWhereUniqueInput>;
 };
 
 export type MediaParentWhereInput = {
+  AboutItem?: InputMaybe<AboutItemWhereInput>;
   MarketItem?: InputMaybe<MarketItemWhereInput>;
 };
 
 export type MediaParentWhereUniqueInput = {
+  AboutItem?: InputMaybe<AboutItemWhereUniqueInput>;
   MarketItem?: InputMaybe<MarketItemWhereUniqueInput>;
 };
 
@@ -10898,12 +10906,12 @@ export enum _SystemDateTimeFieldVariation {
 export type AboutDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AboutDataQuery = { __typename?: 'Query', aboutUses: Array<{ __typename?: 'AboutUs', title?: string | null, aboutList: Array<{ __typename?: 'AboutItem', title: string, image: Array<any>, description: { __typename?: 'RichText', raw: any } }> }> };
+export type AboutDataQuery = { __typename?: 'Query', aboutUses: Array<{ __typename?: 'AboutUs', title?: string | null, aboutList: Array<{ __typename?: 'AboutItem', title: string, description: { __typename?: 'RichText', raw: any }, photo?: { __typename?: 'Media', image: any, captionAltText?: string | null } | null }> }> };
 
 export type AchievementDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AchievementDataQuery = { __typename?: 'Query', achievementLists: Array<{ __typename?: 'AchievementList', title?: string | null, achievementItem: Array<{ __typename?: 'AchievementItem', date: any, name: string, image: Array<any>, description: { __typename?: 'RichText', raw: any } }> }> };
+export type AchievementDataQuery = { __typename?: 'Query', achievementLists: Array<{ __typename?: 'AchievementList', title?: string | null, achievementItem: Array<{ __typename?: 'AchievementItem', date: string, name: string, image: Array<any>, description: { __typename?: 'RichText', raw: any } }> }> };
 
 export type CollectionDataQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -10936,7 +10944,7 @@ export type SeasonalDataQueryVariables = Exact<{ [key: string]: never; }>;
 export type SeasonalDataQuery = { __typename?: 'Query', seasonalDrops: Array<{ __typename?: 'SeasonalDrop', collectionName: string, pastCollection?: boolean | null, homepageDisplay?: boolean | null, collectionDescription: { __typename?: 'RichText', raw: any }, productList: Array<{ __typename?: 'Product', productPhoto: Array<any>, name: string, dietary: Array<DietaryRestriction>, price?: { __typename?: 'RichText', raw: any } | null, flavour: Array<{ __typename?: 'Flavour', flavourName: string, dietary?: DietaryRestriction | null, flavourPrice?: { __typename?: 'RichText', raw: any } | null, flavourDescription?: { __typename?: 'RichText', raw: any } | null }>, shortDescription: { __typename?: 'RichText', raw: any }, fullDescription?: { __typename?: 'RichText', raw: any } | null }> }> };
 
 
-export const AboutDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AboutData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aboutUses"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"aboutList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"}}]}}]}}]}}]} as unknown as DocumentNode<AboutDataQuery, AboutDataQueryVariables>;
+export const AboutDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AboutData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aboutUses"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"aboutList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"captionAltText"}}]}}]}}]}}]}}]} as unknown as DocumentNode<AboutDataQuery, AboutDataQueryVariables>;
 export const AchievementDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AchievementData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"achievementLists"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"achievementItem"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"}}]}}]}}]}}]} as unknown as DocumentNode<AchievementDataQuery, AchievementDataQueryVariables>;
 export const CollectionDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CollectionData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"collectionsPages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}}]}}]} as unknown as DocumentNode<CollectionDataQuery, CollectionDataQueryVariables>;
 export const FooterDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FooterData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contactInfos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"bio"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"location"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"instagram"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<FooterDataQuery, FooterDataQueryVariables>;

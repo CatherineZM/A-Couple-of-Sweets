@@ -28,11 +28,11 @@ html.lenis body {
 }
 
 .announceSwiper {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
-.announceSwiper .swiper-wrapper{
+.announceSwiper .swiper-wrapper {
     align-items: center;
 }
 
@@ -46,19 +46,28 @@ html.lenis body {
     user-select: none;
 }
 
-.popupSwiper .swiper-wrapper{
-    padding-bottom: 30px
+.popupSwiper .swiper-wrapper {
+    padding-bottom: 30px;
 }
 
-.popupSwiper .swiper-pagination{
-    bottom: 0px
+.popupSwiper .swiper-pagination {
+    bottom: 0px;
 }
 
-.popupSwiper .swiper-pagination-bullet{
-    background-color: #F9F7EF;
+.popupSwiper .swiper-pagination-bullet {
+    background-color: #f9f7ef;
     opacity: 0.8;
 }
 
-.popupSwiper .swiper-pagination-bullet-active{
-    background-color: #4F5626;
+.popupSwiper .swiper-pagination-bullet-active {
+    background-color: #4f5626;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .vertical-timeline--animate .vertical-timeline-element-content.bounce-in,
+    .vertical-timeline--animate .vertical-timeline-element-icon.bounce-in {
+        -webkit-animation: none !important;
+        animation: none !important;
+        visibility: visible !important;
+    }
 }

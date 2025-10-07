@@ -1,5 +1,5 @@
 // internal component
-import { H3 } from "@/modules/components/utils";
+import { H2 } from "@/modules/components/utils";
 // react
 import React, { useState } from "react";
 
@@ -162,10 +162,12 @@ export default function MarketsDisplay({ markets }: Props) {
     ): JSX.Element => {
         if (expanded) {
             return (
-                <div className='pt-4'>
-                    {item.map((i: any) => 
-                        <MarketItem marketItem={i} /> 
-                    )}
+                <div className="pt-4">
+                    {item.map((i: any, index: number) => (
+                        <div key={`market-${index}`}>
+                            <MarketItem marketItem={i} />
+                        </div>
+                    ))}
                 </div>
             );
         }
@@ -174,7 +176,7 @@ export default function MarketsDisplay({ markets }: Props) {
 
     return (
         <div className='max-w-screen-lg w-full flex flex-col items-center'>
-            <H3 className='text-ganache'>{markets.title}</H3>
+            <H2 className='text-ganache'>{markets.title}</H2>
             <hr className="border-ganache/70 my-3 w-full" />
             {list.map((item) => 
                 parentSection(item.title, item.id, item.content, item.expanded, item.setExpanded)

@@ -9,7 +9,10 @@ export const ABOUT_DATA = gql(`
                 description {
                     raw
                 }
-                image
+                photo {
+                    image
+                    captionAltText
+                }
             }
         }
     }

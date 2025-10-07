@@ -26,7 +26,7 @@ export default function MarketItem({ marketItem }: Props) {
     const dayNum = format(date, "dd"); // e.g., 18
 
     return (
-        <div className='grid grid-cols-10 text-olive rounded-xl py-2 md:py-4 gap-x-4 w-full'>
+        <div className='grid grid-cols-7 md:grid-cols-10 text-olive rounded-xl py-2 md:py-4 gap-x-1 md:gap-x-4 w-full'>
             {/* Left date section */}
             <div className='col-span-2 flex flex-row items-center justify-center gap-x-2 border-r-2 border-olive'>
                 <div className="flex flex-col text-right gap-y-1 justify-center">
