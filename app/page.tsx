@@ -7,7 +7,7 @@ import getSeasonalData from '@/modules/fetchData/getSeasonalData';
 import getFeaturedData from '@/modules/fetchData/getFeaturedData';
 
 // local component
-import { H1, H4, RichTextRender } from '@/modules/components/utils/index';
+import { H1, RichTextRender } from '@/modules/components/utils/index';
 import CollectionRow from '@/modules/components/home/collection';
 import TextScroll from '@/modules/components/home/textScroll';
 import HomeAnnouncement from '@/modules/components/home/announcement';

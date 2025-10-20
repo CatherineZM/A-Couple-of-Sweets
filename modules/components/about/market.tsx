@@ -41,7 +41,7 @@ export default function MarketsDisplay({ markets }: Props) {
         const marketDate = new Date(item.marketDate);
         return marketDate < today;
     });
-    const [expandedUpcoming, setExpandedUpcoming] = useState(false);
+    const [expandedUpcoming, setExpandedUpcoming] = useState(true);
     const [expandedPast, setExpandedPast] = useState(false);
 
     const list = [
