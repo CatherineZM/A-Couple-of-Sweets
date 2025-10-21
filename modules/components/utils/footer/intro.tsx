@@ -44,7 +44,7 @@ export default function FooterIntro({
                     <div className='flex flex-col text-ganache'>
                         <H4>Instagram</H4>
                         <Link
-                            href='https://www.instagram.com/a_couple_ofsweets?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=='
+                            href='https://www.instagram.com/a_couple_ofsweets'
                             target='_blank'>
                             <Paragraph strong className="hover:text-olive duration-300 transition-all ease-in-out">@a_couple_ofsweets</Paragraph>
                         </Link>

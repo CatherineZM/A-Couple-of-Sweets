@@ -53,9 +53,42 @@ const menu = [
     },
 ];
 
-export const metadata: Metadata = {
-    title: "A Couple Of Sweets",
-    description: "Your number one choice of sweets in Toronto",
+export const metadata = {
+    title: "A Couple of Sweets",
+    description:
+        "A Couple of Sweets is a Toronto-based bakery where every dessert is made with integrity, free from artificial sweeteners, colors, and flavors. We believe that great desserts don’t need unnecessary additives—just quality ingredients, skill, and passion.",
+    keywords: [
+        "Toronto bakery",
+        "natural sweets Toronto",
+        "handmade desserts Toronto",
+        "home-baked sweets",
+        "no artificial ingredients bakery",
+        "professional pastry chefs Toronto",
+    ],
+    openGraph: {
+        title: "A Couple of Sweets",
+        description:
+            "A Couple of Sweets is a Toronto-based bakery where every dessert is made with integrity, free from artificial sweeteners, colors, and flavors. We believe that great desserts don’t need unnecessary additives—just quality ingredients, skill, and passion.",
+        url: "http://acoupleofsweets.ca",
+        siteName: "A Couple of Sweets",
+        images: [
+            {
+                url: "http://acoupleofsweets.ca/op-cover.png",
+                width: 1200,
+                height: 630,
+                alt: "All-natural sweets by A Couple of Sweets",
+            },
+        ],
+        locale: "en_CA",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "A Couple of Sweets",
+        description:
+            "Toronto bakery specializing in handmade, home-baked sweets using only natural ingredients. Crafted by professional chefs.",
+        images: ["http://acoupleofsweets.ca/op-cover.png"],
+    },
 };
 
 export default function RootLayout({
