@@ -1,17 +1,56 @@
 // Next.js specific
-import { Metadata } from 'next'
+import { Metadata } from "next";
+import Image from 'next/image';
 
 // data fetch
 import getHomeData from "@/modules/fetchData/getHomeData";
-import getSeasonalData from '@/modules/fetchData/getSeasonalData';
-import getFeaturedData from '@/modules/fetchData/getFeaturedData';
+import getSeasonalData from "@/modules/fetchData/getSeasonalData";
+import getFeaturedData from "@/modules/fetchData/getFeaturedData";
 
 // local component
-import { H1, RichTextRender } from '@/modules/components/utils/index';
-import CollectionRow from '@/modules/components/home/collection';
-import TextScroll from '@/modules/components/home/textScroll';
-import HomeAnnouncement from '@/modules/components/home/announcement';
-import FloatingImage from '@/modules/components/utils/floatingImage';
+import { H1, RichTextRender } from "@/modules/components/utils/index";
+import CollectionRow from "@/modules/components/home/collection";
+import TextScroll from "@/modules/components/home/textScroll";
+import HomeAnnouncement from "@/modules/components/home/announcement";
+import FloatingImage from "@/modules/components/utils/floatingImage";
+
+export const metadata: Metadata = {
+    title: "A Couple of Sweets",
+    description:
+        "A Couple of Sweets is a Toronto-based bakery where every dessert is made with integrity, free from artificial sweeteners, colors, and flavors. We believe that great desserts don’t need unnecessary additives—just quality ingredients, skill, and passion.",
+    keywords: [
+        "Toronto bakery",
+        "natural sweets Toronto",
+        "handmade desserts Toronto",
+        "home-baked sweets",
+        "no artificial ingredients bakery",
+        "professional pastry chefs Toronto",
+    ],
+    openGraph: {
+        title: "A Couple of Sweets",
+        description:
+            "A Couple of Sweets is a Toronto-based bakery where every dessert is made with integrity, free from artificial sweeteners, colors, and flavors. We believe that great desserts don’t need unnecessary additives—just quality ingredients, skill, and passion.",
+        url: "http://acoupleofsweets.ca",
+        siteName: "A Couple of Sweets",
+        images: [
+            {
+                url: "http://acoupleofsweets.ca/op-cover.png",
+                width: 1200,
+                height: 630,
+                alt: "All-natural sweets by A Couple of Sweets",
+            },
+        ],
+        locale: "en_CA",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "A Couple of Sweets",
+        description:
+            "Toronto bakery specializing in handmade, home-baked sweets using only natural ingredients. Crafted by professional chefs.",
+        images: ["http://acoupleofsweets.ca/op-cover.png"],
+    },
+};
 
 export default async function Home(): Promise<JSX.Element> {
     const HomeData = getHomeData();
@@ -90,8 +129,7 @@ export default async function Home(): Promise<JSX.Element> {
         },
         {
             icon: "/icons/spatula.png",
-            className:
-                "top-[25%] -left-[5%] md:top-[20%] md:left-[105%]",
+            className: "top-[25%] -left-[5%] md:top-[20%] md:left-[105%]",
             svgClassName:
                 "w-[20vw] md:w-[10vw] md:max-w-[60%] xl:max-w-[70%] rotate-45",
             xRange: 10,
@@ -123,10 +161,12 @@ export default async function Home(): Promise<JSX.Element> {
                         className={item.className}>
                         <div
                             className={`${item.svgClassName} relative aspect-square`}>
-                            <img
+                            <Image
                                 src={item.icon}
                                 alt=""
-                                className="object-contain w-full h-full"
+                                fill
+                                sizes="(max-width: 768px) 40vw, (max-width: 1280px) 25vw, 15vw"
+                                className="object-contain"
                             />
                         </div>
                     </FloatingImage>
@@ -183,10 +223,12 @@ export default async function Home(): Promise<JSX.Element> {
                             className={item.className}>
                             <div
                                 className={`${item.svgClassName} relative aspect-square`}>
-                                <img
+                                <Image
                                     src={item.icon}
                                     alt=""
-                                    className="object-contain w-full h-full"
+                                    fill
+                                    sizes="(max-width: 768px) 40vw, (max-width: 1280px) 25vw, 15vw"
+                                    className="object-contain"
                                 />
                             </div>
                         </FloatingImage>
@@ -209,10 +251,12 @@ export default async function Home(): Promise<JSX.Element> {
                             className={item.className}>
                             <div
                                 className={`${item.svgClassName} relative aspect-square`}>
-                                <img
+                                <Image
                                     src={item.icon}
                                     alt=""
-                                    className="object-contain w-full h-full"
+                                    fill
+                                    sizes="(max-width: 768px) 40vw, (max-width: 1280px) 25vw, 15vw"
+                                    className="object-contain"
                                 />
                             </div>
                         </FloatingImage>

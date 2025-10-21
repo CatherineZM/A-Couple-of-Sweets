@@ -9,6 +9,7 @@ import FloatingImage from "@/modules/components/utils/floatingImage";
 
 // external component
 import { Suspense } from "react";
+import Image from "next/image";
 
 import type { Metadata } from "next";
 import JsonLd from "@/modules/components/utils/jsonLD";
@@ -147,10 +148,12 @@ export default async function About(): Promise<JSX.Element> {
                                 className={item.className}>
                                 <div
                                     className={`${item.svgClassName} relative aspect-square`}>
-                                    <img
+                                    <Image
                                         src={item.icon}
                                         alt=""
-                                        className="object-contain w-full h-full"
+                                        fill
+                                        sizes="(max-width: 768px) 40vw, (max-width: 1280px) 25vw, 15vw"
+                                        className="object-contain"
                                     />
                                 </div>
                             </FloatingImage>
@@ -178,10 +181,12 @@ export default async function About(): Promise<JSX.Element> {
                                 className={item.className}>
                                 <div
                                     className={`${item.svgClassName} relative aspect-square`}>
-                                    <img
+                                    <Image
                                         src={item.icon}
                                         alt=""
-                                        className="object-contain w-full h-full"
+                                        fill
+                                        sizes="(max-width: 768px) 40vw, (max-width: 1280px) 25vw, 15vw"
+                                        className="object-contain"
                                     />
                                 </div>
                             </FloatingImage>

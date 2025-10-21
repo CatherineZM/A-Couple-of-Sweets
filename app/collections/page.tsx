@@ -12,9 +12,8 @@ import { H1, H4, Paragraph } from "@/modules/components/utils";
 import { LuWheatOff, LuMilkOff, LuNutOff } from "react-icons/lu";
 import { RichText } from "@graphcms/rich-text-react-renderer";
 import { Suspense } from "react";
-
 import type { Metadata } from "next";
-import JsonLd from "@/modules/components/utils/jsonLD";
+import Image from "next/image";
 
 export const metadata: Metadata = {
     title: "Dessert Collections — Seasonal & Signature | A Couple of Sweets",
@@ -52,77 +51,7 @@ export const metadata: Metadata = {
     },
 };
 
-export default async function Collections({ searchParams }: { searchParams?: Record<string, string | string[] | undefined> }): Promise<JSX.Element> {
-    // Read UTM from query string (keep single canonical page)
-    const rawUtm = searchParams?.utm_source;
-    const utm = Array.isArray(rawUtm) ? rawUtm[0] : rawUtm || "";
-
-    const jsonLdBase = {
-        "@context": "https://schema.org",
-        "@type": "CollectionPage",
-        name: "Dessert Collections",
-        url: "https://acoupleofsweets.ca/collections",
-        isPartOf: {
-            "@type": "WebSite",
-            name: "A Couple of Sweets",
-            url: "https://acoupleofsweets.ca",
-        },
-    };
-
-    let collectionDetails = {};
-
-    switch (utm) {
-        case "current":
-            collectionDetails = {
-                about: {
-                    "@type": "ProductCollection",
-                    name: "Seasonal Collection",
-                    description:
-                        "We release monthly drops of seasonal favourites, including new cake flavours, tarts, dessert cups, and cookies!",
-                    image: "https://acoupleofsweets.ca/img/collections/op-cover.png",
-                },
-            };
-            break;
-        case "all-time":
-            collectionDetails = {
-                about: {
-                    "@type": "ProductCollection",
-                    name: "All-time Fav",
-                    description:
-                        "Our most popular dessert cups, tarts and cookies that's all-year around.",
-                    image: "https://acoupleofsweets.ca/img/collections/op-cover.png",
-                },
-            };
-            break;
-        case "past":
-            collectionDetails = {
-                about: {
-                    "@type": "ProductCollection",
-                    name: "Past Seasonal",
-                    description:
-                        "Our past seasonal collections that are temporarily unavailable.",
-                    image: "https://acoupleofsweets.ca/img/collections/op-cover.png",
-                },
-            };
-            break;
-        default:
-            collectionDetails = {
-                about: {
-                    "@type": "ProductCollection",
-                    name: "Collections",
-                    description:
-                        "Signature and seasonal collections baked in Toronto with real ingredients only.",
-                    image: "https://acoupleofsweets.ca/img/collections/op-cover.png",
-                    brand: {
-                        "@type": "Organization",
-                        name: "A Couple of Sweets",
-                    },
-                },
-            };
-            break;
-    }
-
-    const jsonLd = { ...jsonLdBase, ...collectionDetails };
+export default async function Collections(): Promise<JSX.Element> {
     
     const SeasonalData = getSeasonalData();
     const FeaturedData = getFeaturedData();
@@ -180,7 +109,6 @@ export default async function Collections({ searchParams }: { searchParams?: Rec
 
     return (
         <>
-            <JsonLd json={jsonLd} />
             <div className="bg-cream">
                 <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-x-clip">
                     {icons.map((item, index) => (
@@ -192,10 +120,12 @@ export default async function Collections({ searchParams }: { searchParams?: Rec
                             className={item.className}>
                             <div
                                 className={`${item.svgClassName} relative aspect-square`}>
-                                <img
+                                <Image
                                     src={item.icon}
                                     alt=""
-                                    className="object-contain w-full h-full"
+                                    fill
+                                    sizes="(max-width: 768px) 40vw, (max-width: 1280px) 25vw, 15vw"
+                                    className="object-contain"
                                 />
                             </div>
                         </FloatingImage>
@@ -248,10 +178,12 @@ export default async function Collections({ searchParams }: { searchParams?: Rec
                                 className={item.className}>
                                 <div
                                     className={`${item.svgClassName} relative aspect-square`}>
-                                    <img
+                                    <Image
                                         src={item.icon}
                                         alt=""
-                                        className="object-contain w-full h-full"
+                                        fill
+                                        sizes="(max-width: 768px) 40vw, (max-width: 1280px) 25vw, 15vw"
+                                        className="object-contain"
                                     />
                                 </div>
                             </FloatingImage>

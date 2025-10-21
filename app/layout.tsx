@@ -53,7 +53,7 @@ const menu = [
     },
 ];
 
-export const metadata = {
+export const metadata: Metadata = {
     title: "A Couple of Sweets",
     description:
         "A Couple of Sweets is a Toronto-based bakery where every dessert is made with integrity, free from artificial sweeteners, colors, and flavors. We believe that great desserts don’t need unnecessary additives—just quality ingredients, skill, and passion.",
